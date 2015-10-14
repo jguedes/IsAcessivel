@@ -598,7 +598,7 @@ public class RelatorioDaUrl {
 
 			for (int i = 0; i < cLinhas.length; i++) {
 
-				String linha = Normalizador.normalizar(i + 1);
+				String linha = String.format("%04d", (i + 1));
 
 				JSONObject jLinha = new JSONObject();
 
@@ -778,7 +778,7 @@ public class RelatorioDaUrl {
 				linha.setAttribute(elements.get("col"), arrayColunas.get(i).toString());
 				linha.setAttribute(elements.get("taglen"), arrayTagLength.get(i).toString());
 				linha.setAttribute(elements.get("avisoerro"), arrayAvOuErr.get(i).toString());
-				String strLinha = Normalizador.normalizar(arrayLinhas.get(i));
+				String strLinha = String.format("%04d", (arrayLinhas.get(i)));
 				linha.setTextContent(strLinha);
 				linhas.appendChild(linha);
 			}
