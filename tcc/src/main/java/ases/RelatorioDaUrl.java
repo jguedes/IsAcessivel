@@ -618,12 +618,6 @@ public class RelatorioDaUrl {
 
 	}
 
-	public static void main(String[] args) {
-
-		System.out.format(String.format("%04d", 1));
-
-	}
-
 	/**
 	 * Retorna um documento serializado em XML
 	 * 
