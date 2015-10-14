@@ -25,26 +25,38 @@
  *******************************************************************************/
 
 package ases;
+
 /**
- * Formata o n�mero 
+ * Formata o n�mero
  */
 public class Normalizador {
 
 	public static String normalizar(int i) {
-	
+
 		String retorno = String.valueOf(i);
+
 		for (int j = retorno.length(); j < 4; j++) {
+
 			retorno = "0" + retorno;
+
 		}
+
 		return retorno;
+
 	}
-	
+
 	public static String normalizar(Integer i) {
+
 		String retorno = String.valueOf(i);
+
 		for (int j = retorno.length(); j < 4; j++) {
+
 			retorno = "0" + retorno;
+
 		}
+
 		return retorno;
+
 	}
 
 }

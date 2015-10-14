@@ -50,6 +50,8 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.log4j.Logger;
+import org.primefaces.json.JSONException;
+import org.primefaces.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -121,10 +123,6 @@ public class RelatorioDaUrl {
 	public Profundidade profundidade;
 
 	public String hashCodeString;
-
-	private int pagIdBanco;
-
-	private int portalIdBanco;
 
 	public Integer hashCode;
 
@@ -369,27 +367,23 @@ public class RelatorioDaUrl {
 	 */
 	public StringBuilder getConteudo(ContextoDeAvaliacao contexto) {
 
-		G_File arqT = new G_File(contexto.getFolderTemp() + getNomeProjeto() + "/reparo/temp/" + this.hashCodeString);
+		G_File arq = new G_File(contexto.getFolderTemp() + this.hashCodeString);
 
-		if (arqT.exists()) {
+		if (arq.exists()) {
 
-			return new StringBuilder(arqT.read());
-
-		} else {
-
-			G_File arq = new G_File(contexto.getFolderTemp() + this.hashCodeString);
-
-			if (arq.exists()) {
-
-				// System.err.println("arquivo n�o temporario em uso:"+
-				// this.hashCodeString);
-				return new StringBuilder(arq.read());
-
-			}
+			return new StringBuilder(arq.read());
 
 		}
 
-		// n�o deve chegar aqui
+		return getConteudoAlternativo(contexto);
+
+	}
+
+	/**
+	 * @param contexto
+	 * @return
+	 */
+	private StringBuilder getConteudoAlternativo(ContextoDeAvaliacao contexto) {
 		StringBuilder sb = new StringBuilder();
 
 		StringBuilder sbd = new StringBuilder();
@@ -403,10 +397,7 @@ public class RelatorioDaUrl {
 			FileInputStream fis = null;
 
 			try {
-				// JOptionPane.showMessageDialog(null,"arq = " +
-				// relatorio.getUrl());
 
-				// JOptionPane.showMessageDialog(null,"fileexist");
 				if (file.exists()) {
 
 					fis = new FileInputStream(file);
@@ -516,7 +507,6 @@ public class RelatorioDaUrl {
 		}
 
 		return sbd;
-
 	}
 
 	/**
@@ -586,6 +576,54 @@ public class RelatorioDaUrl {
 		this.mostraP3 = mostraP3;
 	}
 
+	public JSONObject serializarJSON(ContextoDeAvaliacao contexto) throws JSONException {
+
+		JSONObject j = new JSONObject();
+
+		j.put(elements.get("url"), this.getUrl());
+
+		j.put(elements.get("errosp1"), String.valueOf(this.getErrosPrioridade1()));
+		j.put(elements.get("errosp2"), String.valueOf(this.getErrosPrioridade2()));
+		j.put(elements.get("errosp3"), String.valueOf(this.getErrosPrioridade3()));
+
+		j.put(elements.get("avisosp1"), String.valueOf(this.getAvisosPrioridade1()));
+		j.put(elements.get("avisosp2"), String.valueOf(this.getAvisosPrioridade2()));
+		j.put(elements.get("avisosp3"), String.valueOf(this.getAvisosPrioridade3()));
+
+		if (!desconsideraConteudo) {
+
+			JSONObject conjuntoLinhas = new JSONObject();
+
+			String[] cLinhas = this.getConteudo(contexto).toString().split("\n");
+
+			for (int i = 0; i < cLinhas.length; i++) {
+
+				String linha = Normalizador.normalizar(i + 1);
+
+				JSONObject jLinha = new JSONObject();
+
+				jLinha.put(elements.get("nro"), linha);
+
+				jLinha.put("linha", cLinhas[i]);
+
+				conjuntoLinhas.put(elements.get("clinha"), jLinha);
+
+			}
+
+			j.put(elements.get("conteudo"), conjuntoLinhas);
+
+		}
+
+		return j;
+
+	}
+
+	public static void main(String[] args) {
+
+		System.out.format(String.format("%04d", 1));
+
+	}
+
 	/**
 	 * Retorna um documento serializado em XML
 	 * 
@@ -637,7 +675,7 @@ public class RelatorioDaUrl {
 
 				for (int i = 0; i < cLinhas.length; i++) {
 
-					String linha = Normalizador.normalizar(i + 1);
+					String linha = String.format("%04d", (i + 1));
 
 					clinha = doc.createElement(elements.get("clinha"));
 
@@ -981,9 +1019,15 @@ public class RelatorioDaUrl {
 			String fileName = String.valueOf(this.hashCodeString);
 
 			File outFile = new File(contexto.getFolderTemp() + fileName + ".xml");
+			//
+			//
+			//
 
 			Document doc = this.serializarXml(contexto);
 
+			//
+			//
+			//
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
 			factory.setNamespaceAware(true);
@@ -1095,23 +1139,6 @@ public class RelatorioDaUrl {
 				this.setListaAvisosP3(this.geraListaDeErros(node));
 			}
 		}
-	}
-
-	public int getPagIdBanco() {
-		return pagIdBanco;
-	}
-
-	public int getPortalIdBanco() {
-		return portalIdBanco;
-	}
-
-	public void setPortalIdBanco(int portalIdBanco) {
-		this.portalIdBanco = portalIdBanco;
-
-	}
-
-	public void setPagIdBanco(int pagIdBanco) {
-		this.pagIdBanco = pagIdBanco;
 	}
 
 	public PadraoAcessibilidade getPadraoAcessibilidade() {

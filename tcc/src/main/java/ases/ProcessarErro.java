@@ -27,7 +27,6 @@
 
 package ases;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -191,7 +190,7 @@ public class ProcessarErro {
 
 		if (relatorio.profundidade.getValue() <= 5) {
 
-			File f = relatorio.geraArquivoRelatorioEmXml2(this.contexto);
+			relatorio.geraArquivoRelatorioEmXml2(this.contexto);
 
 		}
 
