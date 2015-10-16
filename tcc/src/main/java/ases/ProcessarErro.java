@@ -37,11 +37,12 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import br.com.jguedes.tcc.gerenciadorrelatorioarquivo.FachadaArquivador;
 import br.com.jguedes.tcc.model.criterioavaliacao.PadraoAcessibilidade;
 import br.com.jguedes.tcc.util.ContextoDeAvaliacao;
 
 /**
- * Classe que ir&aacute;o gerar os erros da p&aacute;gina. roda pelo menos uma
+ * Classe que ir&atilde;o gerar os erros da p&aacute;gina. Roda pelo menos uma
  * vez para cada p&aacute;gina
  */
 public class ProcessarErro {
@@ -111,14 +112,12 @@ public class ProcessarErro {
 	private ContextoDeAvaliacao contexto;
 
 	public ProcessarErro() {
-		// bancoSite = SingBancoSite.getInstancia();
 	}
 
 	/**
 	 * Processa os erros da urlString passada como par&acirc;metro
 	 * 
 	 * @param r
-	 * @param gerente
 	 * @param contexto
 	 */
 	public ProcessarErro(RelatorioDaUrl r, ContextoDeAvaliacao contexto) {
@@ -182,25 +181,27 @@ public class ProcessarErro {
 
 		relatorio.setMostraP3(mostraP3);
 
-		if (relatorio.profundidade.getValue() > 5) {
+		if (relatorio.getProfundidade().getValue() > 5) {
 
 			GravadorDeTemporarios.gravarTemp(relatorio, this.contexto);
 
 		}
 
-		if (relatorio.profundidade.getValue() <= 5) {
+		if (relatorio.getProfundidade().getValue() <= 5) {
 
-			relatorio.geraArquivoRelatorioEmXml2(this.contexto);
+			relatorio.gravarRelatorio(contexto);
+
+			// relatorio.geraArquivoRelatorioEmXml2(this.contexto);
 
 		}
 
-		if (relatorio.profundidade.getValue() > 5) {
+		if (relatorio.getProfundidade().getValue() > 5) {
 
 			// this.gerente.getContexto().getRelatoriosDeThreadParaGerente().add(relatorio);
 
 		}
 
-		ResumoDoRelatorio.addLine(this.contexto, relatorio.hashCodeString, relatorio.getUrl(),
+		ResumoDoRelatorio.addLine(this.contexto, relatorio.getLinkEvalCode(), relatorio.getUrl(),
 				relatorio.getErrosPrioridade1(), relatorio.getErrosPrioridade2(), relatorio.getErrosPrioridade3(),
 				relatorio.getAvisosPrioridade1(), relatorio.getAvisosPrioridade2(), relatorio.getAvisosPrioridade3());
 
@@ -603,7 +604,8 @@ public class ProcessarErro {
 
 		} else {
 
-			nucleox.setCodHTML(relatorio.getConteudo(this.contexto).toString());
+			nucleox.setCodHTML(
+					FachadaArquivador.recuperarArquivoConteudoHTML(contexto, relatorio.getLinkEvalCode()).toString());
 
 			if (this.contexto.getCriterio().getPadraoAcessibilidade() == PadraoAcessibilidade.WCAG) {
 

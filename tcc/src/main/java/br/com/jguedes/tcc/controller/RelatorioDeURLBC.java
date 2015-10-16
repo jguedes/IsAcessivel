@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Controller;
 
 import ases.RelatorioDaUrl;
-import br.com.jguedes.tcc.model.relatorioresumido.ResumoDeAvaliacao;
 import br.com.jguedes.tcc.model.repository.RelatorioDeURLDAO;
 import br.com.jguedes.tcc.util.ContextoDeAvaliacao;
 
@@ -30,9 +29,7 @@ public class RelatorioDeURLBC implements Serializable {
 
 	public RelatorioDaUrl getRelatorioDeURL(ContextoDeAvaliacao contexto) {
 
-		ResumoDeAvaliacao resumoDeAvaliacaoAtual = contexto.getResumoDeAvaliacaoAtual();
-
-		return relatorioDeURLDAO.getRelatorioDeURL(resumoDeAvaliacaoAtual, contexto);
+		return relatorioDeURLDAO.getRelatorioDeURL(contexto);
 
 	}
 

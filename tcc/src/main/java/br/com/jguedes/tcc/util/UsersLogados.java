@@ -32,4 +32,5 @@ public class UsersLogados implements Serializable {
 		return usersLogados.get(userContextoID);
 
 	}
+
 }

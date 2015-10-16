@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import ases.ProcessarErro;
 import ases.RelatorioDaUrl;
+import br.com.jguedes.tcc.gerenciadorrelatorioarquivo.FachadaArquivador;
 import br.com.jguedes.tcc.model.User;
 import br.com.jguedes.tcc.model.criterioavaliacao.CriterioAvaliacao;
 import edu.uci.ics.crawler4j.crawler.Page;
@@ -40,7 +41,7 @@ public class MyCrawler extends WebCrawler {
 
 		CriterioAvaliacao criterio = userLogado.getContexto().getCriterio();
 
-		if (url.getURL().indexOf(criterio.getUrl()) != 0) {
+		if (url.getURL().indexOf(criterio.getUrl()) != 0 || url.getURL().indexOf("replytocom") != -1) {
 			return false;
 		}
 
@@ -86,17 +87,17 @@ public class MyCrawler extends WebCrawler {
 
 		if (page.getParseData() instanceof HtmlParseData) {
 
+			contexto.incrementaTotLinks();
+
 			HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
 
 			String html = htmlParseData.getHtml();
 
-			RelatorioDaUrl r = new RelatorioDaUrl();
+			String linkEvalCode = String.format("LINK%07d", contexto.getTotLinks());
 
-			// RelatorioDaUrl.elementosOriginais();
+			FachadaArquivador.criarArquivoConteudoHTML(html, contexto, linkEvalCode);
 
-			RelatorioDaUrl.elementosReduzidos();
-
-			RelatorioDaUrl.desconsideraConteudo = true;
+			RelatorioDaUrl r = new RelatorioDaUrl(linkEvalCode);
 
 			r.setUrl(page.getWebURL().getURL());
 
@@ -104,17 +105,11 @@ public class MyCrawler extends WebCrawler {
 
 			r.setNomeProjeto(criterio.getUrl().replaceAll("http://", ""));
 
-			r.profundidade = criterio.getProfundidade();
-
-			r.setConteudo(html, contexto.getFolderTemp());
+			r.setProfundidade(criterio.getProfundidade());
 
 			ProcessarErro p = new ProcessarErro(r, contexto);
 
 			p.parseWAI();
-
-			r.deleteArquivosSoComHTML(contexto.getFolderTemp());
-
-			contexto.incrementaTotLinks();
 
 			contexto.gravaLink(contexto.getTotLinks() + ": " + page.getWebURL().getURL());
 

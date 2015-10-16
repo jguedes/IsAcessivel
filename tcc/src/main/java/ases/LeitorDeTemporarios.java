@@ -49,16 +49,19 @@ public class LeitorDeTemporarios {
 
 		if (docs != null) {
 
-			ResumoDoRelatorio resumo = ResumoDoRelatorio.lerArquivoResumoEmXml(docs.remove("resumo.xml"), contexto);
-
-			if (resumo.isGravaCompleto()) {
-
-				for (String key : docs.keySet()) {
-
-					relatorio = RelatorioDaUrl.lerArquivoRelatorioEmXml(docs.get(key), contexto);
-
-				}
-			}
+			// ResumoDoRelatorio resumo =
+			// ResumoDoRelatorio.lerArquivoResumoEmXml(docs.remove("resumo.xml"),
+			// contexto);
+			//
+			// if (resumo.isGravaCompleto()) {
+			//
+			// for (String key : docs.keySet()) {
+			//
+			// relatorio =
+			// RelatorioDaUrl.lerArquivoRelatorioEmXml(docs.get(key), contexto);
+			//
+			// }
+			// }
 		}
 		return (relatorio);
 	}

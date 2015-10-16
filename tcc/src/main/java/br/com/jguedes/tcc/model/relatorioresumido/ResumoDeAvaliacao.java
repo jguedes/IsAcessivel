@@ -12,7 +12,7 @@ import ases.RelatorioDaUrl;
 public class ResumoDeAvaliacao {
 
 	@XmlElement
-	private long hashid;
+	private String linkEvalCode;
 
 	@XmlElement
 	private String link;
@@ -40,7 +40,7 @@ public class ResumoDeAvaliacao {
 	}
 
 	public ResumoDeAvaliacao(RelatorioDaUrl relatorioDaUrl) {
-		setHashid(relatorioDaUrl.hashCode);
+		setLinkEvalCode(relatorioDaUrl.getLinkEvalCode());
 		setLink(relatorioDaUrl.getUrl());
 		setErrop1(relatorioDaUrl.getErrosPrioridade1());
 		setAvisop1(relatorioDaUrl.getAvisosPrioridade1());
@@ -70,15 +70,15 @@ public class ResumoDeAvaliacao {
 		setErrop2(Integer.parseInt(resumoDeAvaliacao[4].toString()));
 		setAvisop3(Integer.parseInt(resumoDeAvaliacao[5].toString()));
 		setErrop3(Integer.parseInt(resumoDeAvaliacao[6].toString()));
-		setHashid(Long.parseLong(resumoDeAvaliacao[7].toString()));
+		setLinkEvalCode(resumoDeAvaliacao[7].toString());
 	}
 
-	public long getHashid() {
-		return hashid;
+	public String getLinkEvalCode() {
+		return linkEvalCode;
 	}
 
-	public void setHashid(long hashid) {
-		this.hashid = hashid;
+	public void setLinkEvalCode(String linkEvalCode) {
+		this.linkEvalCode = linkEvalCode;
 	}
 
 	public String getLink() {

@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import br.com.jguedes.tcc.model.criterioavaliacao.CriterioAvaliacao;
-import br.com.jguedes.tcc.model.relatorioresumido.ResumoDeAvaliacao;
 import br.com.jguedes.tcc.support.UserContexto;
 
 @XmlRootElement
@@ -33,11 +32,14 @@ public class ContextoDeAvaliacao implements Serializable {
 	@XmlElement
 	private int totLinks;
 
+	@XmlElement
+	private String linkEvalCodeRelAtual;
+
 	@XmlTransient
 	private boolean imprimirNoConsole;
 
-	@XmlTransient
-	private ResumoDeAvaliacao resumoDeAvaliacaoAtual;
+	// @XmlTransient
+	// private ResumoDeAvaliacao resumoDeAvaliacaoAtual;
 
 	public ContextoDeAvaliacao(String userContextoID) {
 
@@ -58,6 +60,14 @@ public class ContextoDeAvaliacao implements Serializable {
 		return "/mnt/774ce448-05a2-4fc5-a56c-3261efee833f/Acadêmica/TCC2 - Or. Danilo Monteiro/testeasesweb/"
 				+ userContextoID + File.separator;
 
+	}
+
+	public String getLinkEvalCodeRelAtual() {
+		return linkEvalCodeRelAtual;
+	}
+
+	public void setLinkEvalCodeRelAtual(String linkEvalCodeRelAtual) {
+		this.linkEvalCodeRelAtual = linkEvalCodeRelAtual;
 	}
 
 	public CriterioAvaliacao getCriterio() {
@@ -221,18 +231,6 @@ public class ContextoDeAvaliacao implements Serializable {
 	public void setImprimirNoConsole(boolean imprimirNoConsole) {
 
 		this.imprimirNoConsole = imprimirNoConsole;
-
-	}
-
-	public void setResumoDeAvaliacaoAtual(ResumoDeAvaliacao resumoDeAvaliacaoAtual) {
-
-		this.resumoDeAvaliacaoAtual = resumoDeAvaliacaoAtual;
-
-	}
-
-	public ResumoDeAvaliacao getResumoDeAvaliacaoAtual() {
-
-		return resumoDeAvaliacaoAtual;
 
 	}
 

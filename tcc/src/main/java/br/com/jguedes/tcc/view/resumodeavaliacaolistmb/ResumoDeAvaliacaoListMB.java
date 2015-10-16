@@ -56,9 +56,9 @@ public class ResumoDeAvaliacaoListMB {
 		this.listResumoDeAvaliacao = listResumoDeAvaliacao;
 	}
 
-	public String visualizar(ResumoDeAvaliacao resumoDeAvaliacao) {
+	public String visualizar(String linkEvalCodeRelAtual) {
 
-		this.user.getContexto().setResumoDeAvaliacaoAtual(resumoDeAvaliacao);
+		this.user.getContexto().setLinkEvalCodeRelAtual(linkEvalCodeRelAtual);
 
 		return "exibirrelatoriourl";
 

@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 
+import br.com.jguedes.tcc.gerenciadorrelatorioarquivo.AmbienteArquivacaoXML;
+import br.com.jguedes.tcc.gerenciadorrelatorioarquivo.FachadaArquivador;
+
 public class AvaliadorDeAcessibilidade implements Runnable, Serializable {
 
 	/**
@@ -29,6 +32,8 @@ public class AvaliadorDeAcessibilidade implements Runnable, Serializable {
 	}
 
 	private void avaliar() {
+
+		FachadaArquivador.setAmbienteArquivacao(AmbienteArquivacaoXML.XML_semHTML_nomeTagREDUZIDO_semCONTEUDOLINHAS);
 
 		// initDiretorios(contexto);
 
@@ -131,32 +136,9 @@ public class AvaliadorDeAcessibilidade implements Runnable, Serializable {
 		contexto.logger(
 				"AvaliadorDeAcessibilidade.run(): DONE\t" + ((new Date().getTime() - i) / 1000) + " segundos.\n");
 
-		contexto.logger("Dados dos arquivos gerados:");
-		contexto.logger("Quantidade de links análisados: " + contexto.getTotLinks());
-		File fTemp = new File(contexto.getFolderTemp());
-		contexto.logger("Quantidade de arquivos gerados: " + fTemp.listFiles().length);
-		long z = 0;
-		for (File f : fTemp.listFiles()) {
+		contexto.logger("QUANTIDADE DE LINKS ANALISADOS: " + contexto.getTotLinks());
 
-			z += f.length();
-
-		}
-
-		String b = z + " bytes";
-
-		if (z <= 1024) {
-			b = z + " bytes";
-		} else if (Long.divideUnsigned(z, 1024L) <= 1024L) {
-			b = Long.divideUnsigned(z, 1024L) + " kb";
-		} else if (Long.divideUnsigned(z, 1024L * 1024L) <= 1024L) {
-			b = Long.divideUnsigned(z, 1024L * 1024L) + " mb";
-		} else if (Long.divideUnsigned(z, 1024L * 1024L * 1024L) <= 1024L) {
-			b = Long.divideUnsigned(z, 1024L * 1024L * 1024L) + " gb";
-		} else if (Long.divideUnsigned(z, 1024L * 1024L * 1024L * 1024L) <= 1024L) {
-			b = Long.divideUnsigned(z, 1024L * 1024L * 1024L * 1024L) + " tb";
-		}
-
-		contexto.logger("Espaço ocupado pela pasta com os arquivos: " + b);
+		contexto.logger(FachadaArquivador.getDadosDePasta(contexto.getFolderTemp()));
 
 	}
 }

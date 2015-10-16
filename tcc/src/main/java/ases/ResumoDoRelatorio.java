@@ -31,362 +31,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl;
-
-import br.com.jguedes.tcc.model.criterioavaliacao.CriterioAvaliacao;
-import br.com.jguedes.tcc.model.criterioavaliacao.PadraoAcessibilidade;
-import br.com.jguedes.tcc.model.criterioavaliacao.Profundidade;
 import br.com.jguedes.tcc.util.ContextoDeAvaliacao;
 
 /**
  * Representa��o do resumo do relat�rio
  *
  */
-@SuppressWarnings("restriction")
 public class ResumoDoRelatorio {
-	/**
-	 * Guarda o �ndice corrente para gera��o da p�gina
-	 */
-	private static int indicePg = 1;
-
-	/**
-	 * Guarda o total de links em todas as p�ginas
-	 */
-	private static int totalLinks = 0;
 
 	/**
 	 * Guarda o n�mero de links por p�gina
 	 */
 	public static final int results_pp = 50;
-
-	public static ArrayList<RelatorioDaUrl> relatorios = new ArrayList<RelatorioDaUrl>();
-
-	private boolean gravaCompleto;
-
-	/**
-	 * O conjunto de Op&ccedil&otilde;es selecionadas no in&iacute;cio da
-	 * avalia&ccedil;&atilde;o. Cont&eacute;m as seguintes
-	 * informa&ccedil;&otilde;es:
-	 * <ul>
-	 * <li>Tipo de avalia&ccedil;&atilde;o (WCAG / EGOV);</li>
-	 * <li>Prioridades a serem avaliadas (Prioridade 1, 2 e/ou 3); e</li>
-	 * <li>N&iacute;vel de aprofundamento no site (Sub-dom&iacute;nios
-	 * avaliados).</li>
-	 * </ul>
-	 */
-	private CriterioAvaliacao opcoes;
-
-	public ResumoDoRelatorio(ArrayList<RelatorioDaUrl> relatorios, ContextoDeAvaliacao contexto) {
-		ResumoDoRelatorio.relatorios = relatorios;
-		this.opcoes = contexto.getCriterio();
-		getTotPage(contexto);
-	}
-
-	public ResumoDoRelatorio(ContextoDeAvaliacao contexto) {
-		this.opcoes = contexto.getCriterio();
-		getTotPage(contexto);
-	}
-
-	/**
-	 * @return Returns the relatorios.
-	 */
-	public ArrayList<RelatorioDaUrl> getRelatorios() {
-		return relatorios;
-	}
-
-	/**
-	 * @param relatorios
-	 *            The relatorios to set.
-	 */
-	public void setRelatorios(ArrayList<RelatorioDaUrl> relatorios) {
-		ResumoDoRelatorio.relatorios = relatorios;
-	}
-
-	/**
-	 * @return Returns the opcoes.
-	 */
-	public CriterioAvaliacao getOpcoes() {
-		return opcoes;
-	}
-
-	/**
-	 * @param opcoes
-	 *            The opcoes to set.
-	 */
-	public void setOpcoes(CriterioAvaliacao opcoes) {
-		this.opcoes = opcoes;
-	}
-
-	/**
-	 * @return Returns the gravaCompleto.
-	 */
-	public boolean isGravaCompleto() {
-		return gravaCompleto;
-	}
-
-	/**
-	 * @param gravaCompleto
-	 *            The gravaCompleto to set.
-	 */
-	public void setGravaCompleto(boolean gravaCompleto) {
-		this.gravaCompleto = gravaCompleto;
-	}
-
-	public Document geraResumoEmXml() { // usado para fazer grava��o .sil
-		try {
-
-			Document doc = DocumentBuilderFactoryImpl.newInstance().newDocumentBuilder().newDocument();
-			Element root = doc.createElement("resumo");
-
-			Element completo = doc.createElement("completo");
-			if (this.isGravaCompleto()) {
-				completo.setTextContent("sim");
-			} else {
-				completo.setTextContent("nao");
-			}
-			root.appendChild(completo);
-
-			Element tipoAvaliacao = doc.createElement("tipo_avaliacao");
-			tipoAvaliacao.setTextContent(String.valueOf(opcoes.getPadraoAcessibilidade()));
-			root.appendChild(tipoAvaliacao);
-
-			Element niveis = doc.createElement("niveis");
-			niveis.setTextContent(String.valueOf(opcoes.getProfundidade()));
-			root.appendChild(niveis);
-
-			Element pri1 = doc.createElement("pri1");
-			pri1.setTextContent(String.valueOf(opcoes.isPrioridade1()));
-			root.appendChild(pri1);
-
-			Element pri2 = doc.createElement("pri2");
-			pri2.setTextContent(String.valueOf(opcoes.isPrioridade2()));
-			root.appendChild(pri2);
-
-			Element pri3 = doc.createElement("pri3");
-			pri3.setTextContent(String.valueOf(opcoes.isPrioridade3()));
-			root.appendChild(pri3);
-
-			for (RelatorioDaUrl relatorio : relatorios) {
-				Element rel = doc.createElement("relatorio");
-
-				Element url = doc.createElement("url");
-				url.setTextContent(relatorio.getUrl());
-				rel.appendChild(url);
-
-				Element ep1 = doc.createElement("errosp1");
-				ep1.setTextContent(String.valueOf(relatorio.getErrosPrioridade1()));
-				rel.appendChild(ep1);
-
-				Element ep2 = doc.createElement("errosp2");
-				ep2.setTextContent(String.valueOf(relatorio.getErrosPrioridade2()));
-				rel.appendChild(ep2);
-
-				Element ep3 = doc.createElement("errosp3");
-				ep3.setTextContent(String.valueOf(relatorio.getErrosPrioridade3()));
-				rel.appendChild(ep3);
-
-				Element ap1 = doc.createElement("avisosp1");
-				ap1.setTextContent(String.valueOf(relatorio.getAvisosPrioridade1()));
-				rel.appendChild(ap1);
-
-				Element ap2 = doc.createElement("avisosp2");
-				ap2.setTextContent(String.valueOf(relatorio.getAvisosPrioridade2()));
-				rel.appendChild(ap2);
-
-				Element ap3 = doc.createElement("avisosp3");
-				ap3.setTextContent(String.valueOf(relatorio.getAvisosPrioridade3()));
-				rel.appendChild(ap3);
-
-				root.appendChild(rel);
-			}
-
-			doc.appendChild(root);
-
-			return doc;
-
-		} catch (ParserConfigurationException pce) {
-			return null;
-		}
-	}
-
-	public static File gravaResumoEmXml(File outFile, Document doc) {
-		try {
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			factory.setNamespaceAware(true);
-			factory.setValidating(true);
-
-			TransformerFactory tFactory = TransformerFactory.newInstance();
-			Transformer transformer = tFactory.newTransformer();
-
-			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(outFile);
-			transformer.transform(source, result);
-
-			return outFile;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public File geraArquivoResumoEmXml() {
-		try {
-
-			File outFile = new File("resumo.xml");
-
-			Document doc = this.geraResumoEmXml();
-
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			factory.setNamespaceAware(true);
-			factory.setValidating(true);
-
-			TransformerFactory tFactory = TransformerFactory.newInstance();
-			Transformer transformer = tFactory.newTransformer();
-
-			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(outFile);
-			transformer.transform(source, result);
-
-			return outFile;
-		} catch (Exception e) {
-			ExceptionDialog.showExceptionDialog(e.getMessage());
-			return null;
-		}
-	}
-
-	public ArrayList<File> gerarArquivosRelatorios(ContextoDeAvaliacao contexto) {
-
-		ArrayList<File> arquivos = new ArrayList<File>();
-
-		arquivos.add(this.geraArquivoResumoEmXml());
-
-		if (this.isGravaCompleto()) {
-
-			for (RelatorioDaUrl relatorio : relatorios) {
-
-				File file = relatorio.geraArquivoRelatorioEmXml(contexto);
-				// o
-				// arquivo
-				// serializado
-				if (file != null) {
-					arquivos.add(file);
-				}
-
-			}
-		}
-
-		return arquivos;
-	}
-
-	public ArrayList<File> gerarRelatorioTemporarios(RelatorioDaUrl relatorio, ContextoDeAvaliacao contexto) {
-
-		gravaCompleto = true;
-
-		ArrayList<File> arquivos = new ArrayList<File>();
-
-		arquivos.add(this.geraArquivoResumoEmXml());
-
-		File file = relatorio.geraArquivoRelatorioEmXml(contexto);
-
-		if (file != null) {
-			arquivos.add(file);
-		}
-
-		return arquivos;
-	}
-
-	public static ResumoDoRelatorio lerArquivoResumoEmXml(Document doc, ContextoDeAvaliacao contexto) {
-		ArrayList<RelatorioDaUrl> relatorios = new ArrayList<RelatorioDaUrl>();
-		contexto.setCriterio(lerOpcoesDoXml(doc));
-		ResumoDoRelatorio resumo = new ResumoDoRelatorio(relatorios, contexto);
-		Node root = doc.getFirstChild();
-		NodeList nl = root.getChildNodes();
-		for (int i = 0; i < nl.getLength(); i++) {
-			Node node = nl.item(i);
-			if (node.getNodeName().equalsIgnoreCase("completo")) {
-				String completo = node.getTextContent();
-				if (completo != null && completo.equalsIgnoreCase("sim")) {
-					resumo.setGravaCompleto(true);
-				} else {
-					resumo.setGravaCompleto(false);
-				}
-			} else if (node.getNodeName().equalsIgnoreCase("relatorio")) {
-				RelatorioDaUrl relatorio = new RelatorioDaUrl();
-				NodeList nl2 = node.getChildNodes();
-				for (int j = 0; j < nl2.getLength(); j++) {
-					Node child = nl2.item(j);
-					String childName = child.getNodeName();
-					if (childName.equalsIgnoreCase("url")) {
-						relatorio.setUrl(child.getTextContent());
-					} else if (childName.equalsIgnoreCase("errosp1")) {
-						relatorio.setErrosPrioridade1(Integer.parseInt(child.getTextContent()));
-					} else if (childName.equalsIgnoreCase("errosp2")) {
-						relatorio.setErrosPrioridade2(Integer.parseInt(child.getTextContent()));
-					} else if (childName.equalsIgnoreCase("errosp3")) {
-						relatorio.setErrosPrioridade3(Integer.parseInt(child.getTextContent()));
-					} else if (childName.equalsIgnoreCase("avisosp1")) {
-						relatorio.setAvisosPrioridade1(Integer.parseInt(child.getTextContent()));
-					} else if (childName.equalsIgnoreCase("avisosp2")) {
-						relatorio.setAvisosPrioridade2(Integer.parseInt(child.getTextContent()));
-					} else if (childName.equalsIgnoreCase("avisosp3")) {
-						relatorio.setAvisosPrioridade3(Integer.parseInt(child.getTextContent()));
-					}
-				}
-				relatorios.add(relatorio);
-			}
-		}
-		resumo.setRelatorios(relatorios);
-		return resumo;
-	}
-
-	public static CriterioAvaliacao lerOpcoesDoXml(Document doc) {
-
-		CriterioAvaliacao criterios = new CriterioAvaliacao();
-
-		Node root = doc.getFirstChild();
-		NodeList nl = root.getChildNodes();
-		for (int i = 0; i < nl.getLength(); i++) {
-			Node node = nl.item(i);
-			if (node.getNodeName().equalsIgnoreCase("tipo_avaliacao")) {
-				String tipoAvaliacao = node.getTextContent();
-				if (tipoAvaliacao != null) {
-					criterios.setPadraoAcessibilidade(PadraoAcessibilidade.getOrgao(Integer.parseInt(tipoAvaliacao)));
-				} else {
-					criterios.setPadraoAcessibilidade(PadraoAcessibilidade.getOrgao(1));
-				}
-			} else if (node.getNodeName().equalsIgnoreCase("niveis")) {
-				String niveis = node.getTextContent();
-				if (niveis != null) {
-					criterios.setProfundidade(Profundidade.getProfundidade(Integer.parseInt(niveis)));
-				} else {
-					criterios.setProfundidade(Profundidade.getProfundidade(1));
-				}
-			} else if (node.getNodeName().equalsIgnoreCase("pri1")) {
-				String pri1 = node.getTextContent();
-				criterios.setPrioridade1(Boolean.getBoolean(pri1));
-			} else if (node.getNodeName().equalsIgnoreCase("pri2")) {
-				String pri2 = node.getTextContent();
-				criterios.setPrioridade2(Boolean.getBoolean(pri2));
-			} else if (node.getNodeName().equalsIgnoreCase("niveis")) {
-				String pri3 = node.getTextContent();
-				criterios.setPrioridade3(Boolean.getBoolean(pri3));
-			}
-		}
-		return criterios;
-	}
 
 	/**
 	 * Atualiza uma linha
@@ -455,8 +112,6 @@ public class ResumoDoRelatorio {
 			arq.close();
 		} catch (IOException e) {
 		}
-
-		// contexto.setTotPage(indice);
 	}
 
 	/**
@@ -488,13 +143,6 @@ public class ResumoDoRelatorio {
 	 */
 	public static String getActualPage(ContextoDeAvaliacao contexto) {
 		return getPage(contexto);
-	}
-
-	/**
-	 * Retorna o n�mero da p�gina atual
-	 */
-	public static int getIndicePg() {
-		return indicePg;
 	}
 
 	/**
@@ -555,12 +203,370 @@ public class ResumoDoRelatorio {
 		return sb.toString().trim();
 
 	}
+	/*
+	 * DAQUI PRA BAIXO É LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO
+	 * LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO DAQUI
+	 * PRA BAIXO É LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO
+	 * LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO DAQUI PRA
+	 * BAIXO É LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO
+	 * LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO DAQUI PRA BAIXO É
+	 * LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO
+	 * LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO DAQUI PRA BAIXO É LIXO
+	 * LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO
+	 * LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO DAQUI PRA BAIXO É LIXO LIXO
+	 * LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO
+	 * LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO DAQUI PRA BAIXO É LIXO LIXO LIXO
+	 * LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO
+	 * LIXO LIXO LIXO LIXO LIXO LIXO LIXO DAQUI PRA BAIXO É LIXO LIXO LIXO LIXO
+	 * LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO LIXO
+	 * LIXO LIXO LIXO LIXO LIXO LIXO
+	 */
 
-	public static int getTotalLinks() {
-		return totalLinks;
-	}
+	// /**
+	// * Guarda o �ndice corrente para gera��o da p�gina
+	// */
+	// private int indicePg = 1;
+	//
+	// /**
+	// * Guarda o total de links em todas as p�ginas
+	// */
+	// private int totalLinks = 0;
 
-	public static void setTotalLinks(int totalLinks) {
-		ResumoDoRelatorio.totalLinks = totalLinks;
-	}
+	// public static ArrayList<RelatorioDaUrl> relatorios = new
+	// ArrayList<RelatorioDaUrl>();
+
+	// private boolean gravaCompleto;
+	//
+	// /**
+	// * O conjunto de Op&ccedil&otilde;es selecionadas no in&iacute;cio da
+	// * avalia&ccedil;&atilde;o. Cont&eacute;m as seguintes
+	// * informa&ccedil;&otilde;es:
+	// * <ul>
+	// * <li>Tipo de avalia&ccedil;&atilde;o (WCAG / EGOV);</li>
+	// * <li>Prioridades a serem avaliadas (Prioridade 1, 2 e/ou 3); e</li>
+	// * <li>N&iacute;vel de aprofundamento no site (Sub-dom&iacute;nios
+	// * avaliados).</li>
+	// * </ul>
+	// */
+	// private CriterioAvaliacao opcoes;
+
+	// public ResumoDoRelatorio(ArrayList<RelatorioDaUrl> relatorios,
+	// ContextoDeAvaliacao contexto) {
+	// ResumoDoRelatorio.relatorios = relatorios;
+	// this.opcoes = contexto.getCriterio();
+	// getTotPage(contexto);
+	// }
+	//
+	// public ResumoDoRelatorio(ContextoDeAvaliacao contexto) {
+	// this.opcoes = contexto.getCriterio();
+	// getTotPage(contexto);
+	// }
+
+	// /**
+	// * @return Returns the relatorios.
+	// */
+	// public ArrayList<RelatorioDaUrl> getRelatorios() {
+	// return relatorios;
+	// }
+	//
+	// /**
+	// * @param relatorios
+	// * The relatorios to set.
+	// */
+	// public void setRelatorios(ArrayList<RelatorioDaUrl> relatorios) {
+	// ResumoDoRelatorio.relatorios = relatorios;
+	// }
+	//
+	// /**
+	// * @return Returns the opcoes.
+	// */
+	// public CriterioAvaliacao getOpcoes() {
+	// return opcoes;
+	// }
+	//
+	// /**
+	// * @param opcoes
+	// * The opcoes to set.
+	// */
+	// public void setOpcoes(CriterioAvaliacao opcoes) {
+	// this.opcoes = opcoes;
+	// }
+
+	// /**
+	// * @return Returns the gravaCompleto.
+	// */
+	// public boolean isGravaCompleto() {
+	// return gravaCompleto;
+	// }
+	//
+	// /**
+	// * @param gravaCompleto
+	// * The gravaCompleto to set.
+	// */
+	// public void setGravaCompleto(boolean gravaCompleto) {
+	// this.gravaCompleto = gravaCompleto;
+	// }
+
+	// public Document geraResumoEmXl() { // usado para fazer grava��o .sil
+	// try {
+	//
+	// Document doc =
+	// DocumentBuilderFactoryImpl.newInstance().newDocumentBuilder().newDocument();
+	// Element root = doc.createElement("resumo");
+	//
+	// Element completo = doc.createElement("completo");
+	// if (this.isGravaCompleto()) {
+	// completo.setTextContent("sim");
+	// } else {
+	// completo.setTextContent("nao");
+	// }
+	// root.appendChild(completo);
+	//
+	// Element tipoAvaliacao = doc.createElement("tipo_avaliacao");
+	// tipoAvaliacao.setTextContent(String.valueOf(opcoes.getPadraoAcessibilidade()));
+	// root.appendChild(tipoAvaliacao);
+	//
+	// Element niveis = doc.createElement("niveis");
+	// niveis.setTextContent(String.valueOf(opcoes.getProfundidade()));
+	// root.appendChild(niveis);
+	//
+	// Element pri1 = doc.createElement("pri1");
+	// pri1.setTextContent(String.valueOf(opcoes.isPrioridade1()));
+	// root.appendChild(pri1);
+	//
+	// Element pri2 = doc.createElement("pri2");
+	// pri2.setTextContent(String.valueOf(opcoes.isPrioridade2()));
+	// root.appendChild(pri2);
+	//
+	// Element pri3 = doc.createElement("pri3");
+	// pri3.setTextContent(String.valueOf(opcoes.isPrioridade3()));
+	// root.appendChild(pri3);
+	//
+	// for (RelatorioDaUrl relatorio : relatorios) {
+	// Element rel = doc.createElement("relatorio");
+	//
+	// Element url = doc.createElement("url");
+	// url.setTextContent(relatorio.getUrl());
+	// rel.appendChild(url);
+	//
+	// Element ep1 = doc.createElement("errosp1");
+	// ep1.setTextContent(String.valueOf(relatorio.getErrosPrioridade1()));
+	// rel.appendChild(ep1);
+	//
+	// Element ep2 = doc.createElement("errosp2");
+	// ep2.setTextContent(String.valueOf(relatorio.getErrosPrioridade2()));
+	// rel.appendChild(ep2);
+	//
+	// Element ep3 = doc.createElement("errosp3");
+	// ep3.setTextContent(String.valueOf(relatorio.getErrosPrioridade3()));
+	// rel.appendChild(ep3);
+	//
+	// Element ap1 = doc.createElement("avisosp1");
+	// ap1.setTextContent(String.valueOf(relatorio.getAvisosPrioridade1()));
+	// rel.appendChild(ap1);
+	//
+	// Element ap2 = doc.createElement("avisosp2");
+	// ap2.setTextContent(String.valueOf(relatorio.getAvisosPrioridade2()));
+	// rel.appendChild(ap2);
+	//
+	// Element ap3 = doc.createElement("avisosp3");
+	// ap3.setTextContent(String.valueOf(relatorio.getAvisosPrioridade3()));
+	// rel.appendChild(ap3);
+	//
+	// root.appendChild(rel);
+	// }
+	//
+	// doc.appendChild(root);
+	//
+	// return doc;
+	//
+	// } catch (ParserConfigurationException pce) {
+	// return null;
+	// }
+	// }
+
+	// public static File gravaResumoEmXm(File outFile, Document doc) {
+	// try {
+	// DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	// factory.setNamespaceAware(true);
+	// factory.setValidating(true);
+	//
+	// TransformerFactory tFactory = TransformerFactory.newInstance();
+	// Transformer transformer = tFactory.newTransformer();
+	//
+	// DOMSource source = new DOMSource(doc);
+	// StreamResult result = new StreamResult(outFile);
+	// transformer.transform(source, result);
+	//
+	// return outFile;
+	// } catch (Exception e) {
+	// return null;
+	// }
+	// }
+
+	// public File geraArquivoResumoEmXm() {
+	// try {
+	//
+	// File outFile = new File("resumo.xml");
+	//
+	// Document doc = this.geraResumoEmXml();
+	//
+	// DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	// factory.setNamespaceAware(true);
+	// factory.setValidating(true);
+	//
+	// TransformerFactory tFactory = TransformerFactory.newInstance();
+	// Transformer transformer = tFactory.newTransformer();
+	//
+	// DOMSource source = new DOMSource(doc);
+	// StreamResult result = new StreamResult(outFile);
+	// transformer.transform(source, result);
+	//
+	// return outFile;
+	// } catch (Exception e) {
+	// ExceptionDialog.showExceptionDialog(e.getMessage());
+	// return null;
+	// }
+	// }
+	//
+	// public ArrayList<File> gerarArquivosRelatorio(ContextoDeAvaliacao
+	// contexto) {
+	//
+	// ArrayList<File> arquivos = new ArrayList<File>();
+	//
+	// arquivos.add(this.geraArquivoResumoEmXml());
+	//
+	// if (this.isGravaCompleto()) {
+	//
+	// for (RelatorioDaUrl relatorio : relatorios) {
+	//
+	// File file = relatorio.geraArquivoRelatorioEmXml(contexto);
+	// // o
+	// // arquivo
+	// // serializado
+	// if (file != null) {
+	// arquivos.add(file);
+	// }
+	//
+	// }
+	// }
+	//
+	// return arquivos;
+	// }
+	//
+	// public ArrayList<File> gerarRelatorioTemporario(RelatorioDaUrl relatorio,
+	// ContextoDeAvaliacao contexto) {
+	//
+	// gravaCompleto = true;
+	//
+	// ArrayList<File> arquivos = new ArrayList<File>();
+	//
+	// arquivos.add(this.geraArquivoResumoEmXml());
+	//
+	// File file = relatorio.geraArquivoRelatorioEmXml(contexto);
+	//
+	// if (file != null) {
+	// arquivos.add(file);
+	// }
+	//
+	// return arquivos;
+	// }
+
+	// public static ResumoDoRelatorio lerArquivoResumoEmXm(Document doc,
+	// ContextoDeAvaliacao contexto) {
+	// ArrayList<RelatorioDaUrl> relatorios = new ArrayList<RelatorioDaUrl>();
+	// contexto.setCriterio(lerOpcoesDoXml(doc));
+	// ResumoDoRelatorio resumo = new ResumoDoRelatorio(relatorios, contexto);
+	// Node root = doc.getFirstChild();
+	// NodeList nl = root.getChildNodes();
+	// for (int i = 0; i < nl.getLength(); i++) {
+	// Node node = nl.item(i);
+	// if (node.getNodeName().equalsIgnoreCase("completo")) {
+	// String completo = node.getTextContent();
+	// if (completo != null && completo.equalsIgnoreCase("sim")) {
+	// resumo.setGravaCompleto(true);
+	// } else {
+	// resumo.setGravaCompleto(false);
+	// }
+	// } else if (node.getNodeName().equalsIgnoreCase("relatorio")) {
+	// RelatorioDaUrl relatorio = new RelatorioDaUrl();
+	// NodeList nl2 = node.getChildNodes();
+	// for (int j = 0; j < nl2.getLength(); j++) {
+	// Node child = nl2.item(j);
+	// String childName = child.getNodeName();
+	// if (childName.equalsIgnoreCase("url")) {
+	// relatorio.setUrl(child.getTextContent());
+	// } else if (childName.equalsIgnoreCase("errosp1")) {
+	// relatorio.setErrosPrioridade1(Integer.parseInt(child.getTextContent()));
+	// } else if (childName.equalsIgnoreCase("errosp2")) {
+	// relatorio.setErrosPrioridade2(Integer.parseInt(child.getTextContent()));
+	// } else if (childName.equalsIgnoreCase("errosp3")) {
+	// relatorio.setErrosPrioridade3(Integer.parseInt(child.getTextContent()));
+	// } else if (childName.equalsIgnoreCase("avisosp1")) {
+	// relatorio.setAvisosPrioridade1(Integer.parseInt(child.getTextContent()));
+	// } else if (childName.equalsIgnoreCase("avisosp2")) {
+	// relatorio.setAvisosPrioridade2(Integer.parseInt(child.getTextContent()));
+	// } else if (childName.equalsIgnoreCase("avisosp3")) {
+	// relatorio.setAvisosPrioridade3(Integer.parseInt(child.getTextContent()));
+	// }
+	// }
+	// relatorios.add(relatorio);
+	// }
+	// }
+	// resumo.setRelatorios(relatorios);
+	// return resumo;
+	// }
+
+	// public static CriterioAvaliacao lerOpcoesDoXm(Document doc) {
+	//
+	// CriterioAvaliacao criterios = new CriterioAvaliacao();
+	//
+	// Node root = doc.getFirstChild();
+	// NodeList nl = root.getChildNodes();
+	// for (int i = 0; i < nl.getLength(); i++) {
+	// Node node = nl.item(i);
+	// if (node.getNodeName().equalsIgnoreCase("tipo_avaliacao")) {
+	// String tipoAvaliacao = node.getTextContent();
+	// if (tipoAvaliacao != null) {
+	// criterios.setPadraoAcessibilidade(PadraoAcessibilidade.getOrgao(Integer.parseInt(tipoAvaliacao)));
+	// } else {
+	// criterios.setPadraoAcessibilidade(PadraoAcessibilidade.getOrgao(1));
+	// }
+	// } else if (node.getNodeName().equalsIgnoreCase("niveis")) {
+	// String niveis = node.getTextContent();
+	// if (niveis != null) {
+	// criterios.setProfundidade(Profundidade.getProfundidade(Integer.parseInt(niveis)));
+	// } else {
+	// criterios.setProfundidade(Profundidade.getProfundidade(1));
+	// }
+	// } else if (node.getNodeName().equalsIgnoreCase("pri1")) {
+	// String pri1 = node.getTextContent();
+	// criterios.setPrioridade1(Boolean.getBoolean(pri1));
+	// } else if (node.getNodeName().equalsIgnoreCase("pri2")) {
+	// String pri2 = node.getTextContent();
+	// criterios.setPrioridade2(Boolean.getBoolean(pri2));
+	// } else if (node.getNodeName().equalsIgnoreCase("niveis")) {
+	// String pri3 = node.getTextContent();
+	// criterios.setPrioridade3(Boolean.getBoolean(pri3));
+	// }
+	// }
+	// return criterios;
+	// }
+
+	//
+	// public static int getTotalLinks() {
+	// return totalLinks;
+	// }
+	//
+	// public static void setTotalLinks(int totalLinks) {
+	// ResumoDoRelatorio.totalLinks = totalLinks;
+	// }
+
+	//
+	// /**
+	// * Retorna o n�mero da p�gina atual
+	// */
+	// public int getIndicePg() {
+	// return indicePg;
+	// }
 }

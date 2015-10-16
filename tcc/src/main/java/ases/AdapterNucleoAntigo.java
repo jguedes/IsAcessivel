@@ -30,6 +30,7 @@ package ases;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import br.com.jguedes.tcc.gerenciadorrelatorioarquivo.FachadaArquivador;
 import br.com.jguedes.tcc.util.ContextoDeAvaliacao;
 
 /**
@@ -63,10 +64,13 @@ public class AdapterNucleoAntigo implements InterfNucleos {
 
 			Geral gr = new Geral();
 
-			gr.setStrHtmlSource(relatorio.getConteudo(contexto).toString().trim());
+			StringBuilder htmlSource = FachadaArquivador.recuperarArquivoConteudoHTML(contexto,
+					relatorio.getLinkEvalCode());
+
+			gr.setStrHtmlSource(htmlSource.toString().trim());
 
 			validados = (ArrayList<ArmazenaErroOuAviso>) gr.getErrados(relatorio.getUrl(),
-					contexto.getCriterio().getPadraoAcessibilidade().getValue(), relatorio.getConteudo(contexto));
+					contexto.getCriterio().getPadraoAcessibilidade().getValue(), htmlSource);
 
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block

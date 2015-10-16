@@ -36,7 +36,7 @@
 							<h:outputText value="#{resumoDeAvaliacao.avisop3}" />
 						</p:panel>
 						<p:commandButton value="exibir"
-							action="#{resAvals.visualizar(resumoDeAvaliacao)}"
+							action="#{resAvals.visualizar(resumoDeAvaliacao.getLinkEvalCode())}"
 							ajax="false" style="float:left;height:58px;" />
 					</p:panel>
 				</p:column>

@@ -40,6 +40,14 @@ import java.util.ArrayList;
  * @version 1.1, 21/12/2005
  */
 public final class PontoVerificacao {
+	public int getWcag_emag() {
+		return wcag_emag;
+	}
+
+	public void setWcag_emag(int wcag_emag) {
+		this.wcag_emag = wcag_emag;
+	}
+
 	/**
 	 * N�mero de identifica��o da recomenda��o na base de dados.
 	 */
@@ -106,7 +114,7 @@ public final class PontoVerificacao {
 		this.prioridade = 0;
 		this.gl = 0;
 		this.cp = 0;
-		this.exigencia = 'g';
+		this.exigencia = 'e';
 		this.linhas = new ArrayList<Integer>();
 	}
 
@@ -246,18 +254,27 @@ public final class PontoVerificacao {
 	 */
 	@Override
 	public boolean equals(final Object obj) {
+
 		boolean resultado = false;
 
 		if (obj instanceof PontoVerificacao) {
+
 			PontoVerificacao chk = (PontoVerificacao) obj;
 
-			if ((chk.getCp() == this.cp) && (chk.getGl() == this.gl) && (chk.getPrioridade() == this.prioridade)
-					&& (chk.getExigencia() == this.exigencia)) {
+			if (//
+
+			(chk.getCp() == this.cp) && //
+					(chk.getGl() == this.gl) && //
+					(chk.getPrioridade() == this.prioridade) && //
+					(chk.getExigencia() == this.exigencia) //
+
+			) {
 				resultado = true;
 			}
 		}
 
 		return resultado;
+
 	}
 
 	/**
