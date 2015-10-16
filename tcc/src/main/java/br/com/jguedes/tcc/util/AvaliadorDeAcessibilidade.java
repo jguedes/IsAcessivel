@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 
-import br.com.jguedes.tcc.gerenciadorrelatorioarquivo.AmbienteArquivacaoXML;
+import br.com.jguedes.tcc.gerenciadorrelatorioarquivo.AmbienteArquivacaoJSON;
 import br.com.jguedes.tcc.gerenciadorrelatorioarquivo.FachadaArquivador;
 
 public class AvaliadorDeAcessibilidade implements Runnable, Serializable {
@@ -33,7 +33,7 @@ public class AvaliadorDeAcessibilidade implements Runnable, Serializable {
 
 	private void avaliar() {
 
-		FachadaArquivador.setAmbienteArquivacao(AmbienteArquivacaoXML.XML_semHTML_nomeTagREDUZIDO_semCONTEUDOLINHAS);
+		FachadaArquivador.setAmbienteArquivacao(AmbienteArquivacaoJSON.JSON_semHTML_semCONTEUDOLINHAS);
 
 		// initDiretorios(contexto);
 

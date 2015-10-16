@@ -526,7 +526,7 @@ public class ProcessarErro {
 					erros.get(erros.indexOf(pv)).getTagLength().add(tagLen);
 
 					// ver se n�o ocupa muita memoria
-					erros.get(erros.indexOf(pv)).getTagInteira().add(umaTagInteira);
+					// erros.get(erros.indexOf(pv)).getTagInteira().add(umaTagInteira);
 
 					if (flagErroOuAviso == 'e') {
 
@@ -580,7 +580,7 @@ public class ProcessarErro {
 
 					pv.setAvisoOuErro(avOuErr);
 
-					pv.setTagInteira(tagInteira);
+					// pv.setTagInteira(tagInteira);
 
 					erros.add(pv);
 

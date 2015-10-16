@@ -40,13 +40,6 @@ import java.util.ArrayList;
  * @version 1.1, 21/12/2005
  */
 public final class PontoVerificacao {
-	public int getWcag_emag() {
-		return wcag_emag;
-	}
-
-	public void setWcag_emag(int wcag_emag) {
-		this.wcag_emag = wcag_emag;
-	}
 
 	/**
 	 * N�mero de identifica��o da recomenda��o na base de dados.
@@ -98,7 +91,7 @@ public final class PontoVerificacao {
 	 * Ex.: &lt;img src=""> <br>
 	 * verificar peso em memoria
 	 */
-	private ArrayList<String> tagInteira;
+	// private ArrayList<String> tagInteira;
 
 	/**
 	 * Se a ocorrencia foi um aviso ou erro
@@ -178,6 +171,14 @@ public final class PontoVerificacao {
 	@Override
 	public String toString() {
 		return this.gl + "." + this.cp + " = " + this.prioridade;
+	}
+
+	public int getWcag_emag() {
+		return wcag_emag;
+	}
+
+	public void setWcag_emag(int wcag_emag) {
+		this.wcag_emag = wcag_emag;
 	}
 
 	/**
@@ -369,12 +370,12 @@ public final class PontoVerificacao {
 		this.avisoOuErro = avisoOuErro;
 	}
 
-	public ArrayList<String> getTagInteira() {
-		return tagInteira;
-	}
-
-	public void setTagInteira(ArrayList<String> tagInteira) {
-		this.tagInteira = tagInteira;
-	}
+	// public ArrayList<String> getTagInteira() {
+	// return tagInteira;
+	// }
+	//
+	// public void setTagInteira(ArrayList<String> tagInteira) {
+	// this.tagInteira = tagInteira;
+	// }
 
 }
