@@ -216,7 +216,7 @@ public class RegrasHardCodedEmag extends SuperRegrasHardCoded implements InterfR
 	 * Retorna a prioridade da regra Ex: 2.19
 	 * 
 	 * @param codigo
-	 *            c�digo da regra (2.19)
+	 *            c&oacute;digo da regra (2.19)
 	 * @return Prioridade da regra 1 2 ou 3
 	 */
 	@Override
@@ -224,7 +224,7 @@ public class RegrasHardCodedEmag extends SuperRegrasHardCoded implements InterfR
 		carregaRegras();
 		Regra regra = mapRegra.get(codigo);
 		if (regra == null) {
-			// System.out.print("Regra " +codigo +" n�o encontrada");
+			// System.out.print("Regra " +codigo +" n\u00e1o encontrada");
 			return 0;
 		} else {
 			return regra.getPrioridade();
@@ -248,125 +248,125 @@ public class RegrasHardCodedEmag extends SuperRegrasHardCoded implements InterfR
 		// 2.15 label
 
 		mapRegra.put("1.1", new Regra(1,
-				"Identificar o principal idioma utilizado nos documentos. O idioma do documento deve ser especificado na express�o HTML."));
+				"Identificar o principal idioma utilizado nos documentos. O idioma do documento deve ser especificado na express\u00e3o HTML."));
 		mapRegra.put("1.2", new Regra(1,
-				"Identificar claramente quaisquer mudan�as de idioma no texto de um documento, bem como nos equivalentes textuais (por ex., legendas de imagens). Use o atributo \"lang\" para identificar claramente as altera��es do idioma no texto."));
+				"Identificar claramente quaisquer mudan\u00e7as de idioma no texto de um documento, bem como nos equivalentes textuais (por ex., legendas de imagens). Use o atributo \"lang\" para identificar claramente as altera\u00e7\u00e3es do idioma no texto."));
 		mapRegra.put("1.3", new Regra(1,
-				"Fornecer meios para ignorar e explicar inser��es de arte ASCII com v�rias linhas, tais como links de �ncora ou p�ginas alternativas."));
+				"Fornecer meios para ignorar e explicar inser\u00e7\u00f5es de arte ASCII com v\00e1rias linhas, tais como links de \u00e2ncora ou p\00e1ginas alternativas."));
 		mapRegra.put("1.4", new Regra(1,
-				"Assegurar que todas as informa��es veiculadas com cor estejam tamb�m dispon�veis sem cor."));
+				"Assegurar que todas as informa\u00e7\u00f5es veiculadas com cor estejam tamb\u00eam dispon\u00edveis sem cor."));
 		// Geral por enquanto
 		// Contraste
 		mapRegra.put("1.5", new Regra(1,
-				"Assegurar que a combina��o de cores entre o fundo e o primeiro plano seja suficientemente contrastante para poder ser vista por pessoas com cromodefici�ncias, bem como pelas que utilizam monitores de v�deo monocrom�ticos."));
+				"Assegurar que a combina\u00e7\u00e3o de cores entre o fundo e o primeiro plano seja suficientemente contrastante para poder ser vista por pessoas com cromodefici\u00eancias, bem como pelas que utilizam monitores de v\00eddeo monocrom\00e1ticos."));
 
 		mapRegra.put("1.6", new Regra(1,
-				"Organizar os documentos de tal forma que possam ser lidos sem recurso � folhas de estilo. Por exemplo, se um documento em HTML for reproduzido sem as folhas de estilo que lhe est�o associadas, deve continuar a ser poss�vel l�-lo."));
+				"Organizar os documentos de tal forma que possam ser lidos sem recurso \u00e0 folhas de estilo. Por exemplo, se um documento em HTML for reproduzido sem as folhas de estilo que lhe est\u00e3o associadas, deve continuar a ser poss\u00edvel l\u00ea-lo."));
 		mapRegra.put("1.7", new Regra(1,
-				"N�o usar concep��es que possam provocar intermit�ncia da tela, at� que os leitores de tela ou navegadores do usu�rio possibilitem o seu controle."));
+				"N\u00e3o usar concep\u00e7\00f5es que possam provocar intermit\00eancia da tela, at\u00e9 que os leitores de tela ou navegadores do usu\u00e1rio possibilitem o seu controle."));
 		mapRegra.put("1.8", new Regra(1,
-				"Criar uma seq��ncia l�gica de tabula��o para percorrer links, controles de formul�rios e objetos."));
+				"Criar uma sequ\00eancia l\u00f3gica de tabula\u00e7\\u00e3o para percorrer links, controles de formul\u00e1rios e objetos."));
 		mapRegra.put("1.9", new Regra(1,
-				"Utilizar a linguagem mais clara e simples poss�vel, logicamente, adequada ao conte�do do s�tio."));
+				"Utilizar a linguagem mais clara e simples poss\u00edvel, logicamente, adequada ao conte\u00fado do s\u00edtio."));
 		mapRegra.put("1.10", new Regra(1,
-				"Utilizar os mecanismos de navega��o de maneira coerente, consistente e sistem�tica. Por exemplo, organizar itens do menu por tema, se��es ou classes, etc."));
+				"Utilizar os mecanismos de navega\u00e7\u00e3o de maneira coerente, consistente e sistem\u00e1tica. Por exemplo, organizar itens do menu por tema, se\u00e7\u00f5es ou classes, etc."));
 		mapRegra.put("1.11", new Regra(1,
-				"Fornecer um equivalente textual a cada imagem (isso abrange: representa��es gr�ficas do texto, incluindo s�mbolos, GIFs animados, imagens utilizadas como sinalizadores de pontos de enumera��o, espa�adores e bot�es gr�ficos), para tanto, utiliza-se o atributo \"alt\" ou \"longdesc\" em cada imagem."));
+				"Fornecer um equivalente textual a cada imagem (isso abrange: representa\u00e7\u00f5es gr\u00e1ficas do texto, incluindo s\u00edmbolos, GIFs animados, imagens utilizadas como sinalizadores de pontos de enumera\u00e7\u00e3o, espa\u00e7adores e bot\u00f5es gr\u00e1ficos), para tanto, utiliza-se o atributo \"alt\" ou \"longdesc\" em cada imagem."));
 		mapRegra.put("1.12", new Regra(1,
-				"Fornecer links de texto redundantes relativos a cada regi�o ativa de um mapa de imagem armazenado tanto no cliente quanto no servidor. N�o esquecendo de adicionar texto equivalente � imagem mostrada, no caso o \"alt\" ou \"longdesc\"."));
+				"Fornecer links de texto redundantes relativos a cada regi\u00e3o ativa de um mapa de imagem armazenado tanto no cliente quanto no servidor. N\u00e3o esquecendo de adicionar texto equivalente \u00e0 imagem mostrada, no caso o \"alt\" ou \"longdesc\"."));
 		mapRegra.put("1.13", new Regra(1,
 				"Fornecer resumos das tabelas utilizando o atributo \"summary\", caso seja criada uma tabela para dados. Se a tabela foi criada para efeito de design, deixar o \"summary\" em branco."));
 		mapRegra.put("1.14", new Regra(1,
-				"Em tabelas de dados com dois ou mais n�veis l�gicos de cabe�alhos, sejam de linha ou de coluna, utilizar marca��es para associar as c�lulas de dados �s c�lulas de cabe�alho. Organize tabelas complexas de forma que possa identificar facilmente suas divis�es."));
+				"Em tabelas de dados com dois ou mais n\u00edveis l\u00f3gicos de cabe\u00e7alhos, sejam de linha ou de coluna, utilizar marca\u00e7\u00f5es para associar as c\u00e9lulas de dados \u00e0s c\u00e9lulas de cabe\u00e7alho. Organize tabelas complexas de forma que possa identificar facilmente suas divis\u00f5es."));
 		mapRegra.put("1.15", new Regra(1,
-				"Assegurar que os equivalentes de conte�do dos frames (din�mico ou n�o) sejam atualizados sempre que esse conte�do mudar. A origem do frame sempre deve estar ligada a um arquivo HTML."));
+				"Assegurar que os equivalentes de conte\u00fado dos frames (din\u00e2mico ou N\u00e3o) sejam atualizados sempre que esse conte\u00fado mudar. A origem do frame sempre deve estar ligada a um arquivo HTML."));
 		mapRegra.put("1.16", new Regra(1,
-				"Assegurar a acessibilidade do conte�do de frames, fornecendo uma p�gina alternativa atrav�s do elemento \"noframes\"."));
-		mapRegra.put("1.17",
-				new Regra(1, "Dar a cada frame um t�tulo que facilite a identifica��o dos frames e sua navega��o."));
+				"Assegurar a acessibilidade do conte\u00fado de frames, fornecendo uma p\u00e1gina alternativa atrav\u00e9s do elemento \"noframes\"."));
+		mapRegra.put("1.17", new Regra(1,
+				"Dar a cada frame um t\u00edtulo que facilite a identifica\u00e7\u00e3o dos frames e sua navega\u00e7\u00e3o."));
 		mapRegra.put("1.18", new Regra(1,
-				"Descrever a finalidade dos frames e o modo como se relacionam entre si, se isso n�o for �bvio a partir unicamente dos t�tulos, forne�a uma descri��o mais detalhada."));
+				"Descrever a finalidade dos frames e o modo como se relacionam entre si, se isso N\u00e3o for \u00f3bvio a partir unicamente dos t\u00edtulos, forne\u00e7a uma descri\u00e7\u00e3o mais detalhada."));
 		mapRegra.put("1.19", new Regra(1,
-				"Assegure a acessibilidade de objetos programados, tais como programas interpret�veis e applets, garantindo que a resposta a eventos seja independente do dispositivo de entrada e que qualquer elemento dotado de interface pr�pria possa funcionar com qualquer leitor de tela ou navegador que o usu�rio utilize. Evite colocar scripts que estejam vinculados a links, se isso n�o for poss�vel, fornecer informa��es equivalentes em uma p�gina alternativa acess�vel."));
+				"Assegure a acessibilidade de objetos programados, tais como programas interpret\u00e1veis e applets, garantindo que a resposta a eventos seja independente do dispositivo de entrada e que qualquer elemento dotado de interface pr\u00f3pria possa funcionar com qualquer leitor de tela ou navegador que o usu\u00e1rio utilize. Evite colocar scripts que estejam vinculados a links, se isso N\u00e3o for poss\u00edvel, fornecer informa\u00e7\u00f5es equivalentes em uma p\u00e1gina alternativa acess\u00edvel."));
 		mapRegra.put("1.20", new Regra(1,
-				"Assegurar que todas as p�ginas possam ser utilizadas mesmo que os programas interpret�veis, os applets ou outros objetos programados tenham sido desativados ou n�o sejam suportados. Sempre que tiver script associe logo a seguir o elemento \"noscript\"."));
+				"Assegurar que todas as p\u00E1ginas possam ser utilizadas mesmo que os programas interpret\u00E1veis, os applets ou outros objetos programados tenham sido desativados ou n\u00E3o sejam suportados. Sempre que tiver script associe logo a seguir o elemento \"noscript\"."));
 		mapRegra.put("1.21", new Regra(1,
-				"Fornecer equivalentes textuais para sons (reproduzidos ou n�o com intera��o do usu�rio), arquivos de �udio independentes, trilhas �udio de v�deo e trechos de v�deo."));
+				"Fornecer equivalentes textuais para sons (reproduzidos ou N\u00e3o com intera\u00e7\u00e3o do usu\u00e1rio), arquivos de \u00e1udio independentes, trilhas \u00e1udio de v\00eddeo e trechos de v\00eddeo."));
 		mapRegra.put("1.22", new Regra(1,
-				"Em apresenta��es multim�dia baseadas em tempo (filme ou anima��o), fornecer ou sincronizar alternativas textuais equivalentes (legendas ou descri��es sonoras dos trechos visuais)."));
+				"Em apresenta\u00e7\u00f5es multim\u00eddia baseadas em tempo (filme ou anima\u00e7\u00e3o), fornecer ou sincronizar alternativas textuais equivalentes (legendas ou descri\u00e7\u00f5es sonoras dos trechos visuais)."));
 		mapRegra.put("1.23", new Regra(1,
-				"Evitar p�ginas contendo movimento, at� que os agentes do usu�rio possibilitem o controle e a imobiliza��o do conte�do."));
+				"Evitar p\00e1ginas contendo movimento, at\u00e9 que os agentes do usu\u00e1rio possibilitem o controle e a imobiliza\u00e7\u00e3o do conte\u00fado."));
 		mapRegra.put("1.24", new Regra(1,
-				"N�o sendo poss�vel criar uma p�gina acess�vel, crie uma p�gina alternativa, juntamente com uma justificativa apropriada, que utilize tecnologias em conformidade com este documento - acess�vel, que contenha informa��es (ou funcionalidade) equivalentes e seja atualizada t�o freq�entemente quanto a p�gina original, considerada inacess�vel."));
+				"N\u00e3o sendo poss\u00edvel criar uma p\u00e1gina acess\u00edvel, crie uma p\u00e1gina alternativa, juntamente com uma justificativa apropriada, que utilize tecnologias em conformidade com este documento - acess\u00edvel, que contenha informa\u00e7\u00f5es (ou funcionalidade) equivalentes e seja atualizada t\u00e3o frequentemente quanto a p\u00e1gina original, considerada inacess\u00edvel."));
 		mapRegra.put("2.1", new Regra(2,
-				"Criar documentos pass�veis de valida��o por gram�ticas formais publicadas. Declarando o tipo de documento (atributo \"doctype\") no topo do c�digo fonte de cada p�gina do s�tio. Assim seu s�tio informar� aos servidores, navegadores e validadores que o c�digo est� dentro das regras da linguagem utilizada."));
+				"Criar documentos pass\u00edveis de valida\u00e7\u00e3o por gram\u00e1ticas formais publicadas. Declarando o tipo de documento (atributo \"doctype\") no topo do c\u00f3digo fonte de cada p\u00e1gina do s\u00edtio. Assim seu s\u00edtio informar\u00e1 aos servidores, navegadores e validadores que o c\u00f3digo est\u00e1 dentro das regras da linguagem utilizada."));
 		mapRegra.put("2.2", new Regra(2,
-				"Utilizar unidades relativas, e n�o absolutas, nos valores dos atributos de tabelas, textos, etc. Em CSS n�o use valores absolutos como \"pt\" ou \"px\" e sim valores relativos como o \"em\", \"ex\" ou em porcentagem."));
+				"Utilizar unidades relativas, e N\u00e3o absolutas, nos valores dos atributos de tabelas, textos, etc. Em CSS N\u00e3o use valores absolutos como \"pt\" ou \"px\" e sim valores relativos como o \"em\", \"ex\" ou em porcentagem."));
 		mapRegra.put("2.3", new Regra(2,
-				"Marcar corretamente listas e pontos de enumera��o em listas ordenadas. Use corretamente a estrutura e os itens das listas. Evite o uso destes elementos para formatar par�grafos."));
+				"Marcar corretamente listas e pontos de enumera\u00e7\u00e3o em listas ordenadas. Use corretamente a estrutura e os itens das listas. Evite o uso destes elementos para formatar par\u00e1grafos."));
 		mapRegra.put("2.4", new Regra(2,
-				"N�o criar p�ginas com atualiza��o autom�tica peri�dica, at� que os leitores de tela ou navegadores possibilitem o controle da atualiza��o para o usu�rio. N�o utilize a tag meta \"refresh\" ou dispositivos semelhantes para atualiza��o da p�gina. Caso a p�gina seja continuamente atualizada, informe ao usu�rio que ele deve \"recarregar\" a p�gina de tempos em tempos."));
+				"N\u00e3o criar p\00e1ginas com atualiza\u00e7\u00e3o autom\u00e1tica peri\u00f3dica, at\u00e9 que os leitores de tela ou navegadores possibilitem o controle da atualiza\u00e7\u00e3o para o usu\u00e1rio. N\u00e3o utilize a tag meta \"refresh\" ou dispositivos semelhantes para atualiza\u00e7\u00e3o da p\u00e1gina. Caso a p\u00e1gina seja continuamente atualizada, informe ao usu\u00e1rio que ele deve \"recarregar\" a p\u00e1gina de tempos em tempos."));
 		mapRegra.put("2.5", new Regra(2,
-				"N�o utilizar marca��es para redirecionar as p�ginas automaticamente, at� que os leitores de tela ou navegadores do usu�rio possibilitem interromper o processo."));
+				"N\u00e3o utilizar marca\u00e7\u00f5es para redirecionar as p\00e1ginas automaticamente, at\u00e9 que os leitores de tela ou navegadores do usu\u00e1rio possibilitem interromper o processo."));
 		mapRegra.put("2.6", new Regra(2,
-				"N�o provocar o aparecimento de janelas de sobreposi��o, janelas popup ou outras quaisquer, assim como nenhuma modifica��o do conte�do sem que o usu�rio seja informado disso. N�o � recomend�vel para o usu�rio, que links abram em uma nova janela. Se o usu�rio utiliza um navegador com tela cheia n�o poder� voltar para a p�gina anterior, tamb�m o hist�rico e a possibilidade de ir e voltar a p�ginas visitadas ficam comprometidos. Caso voc� tenha uma real necessidade que sua p�gina abra uma outra janela, informe ao usu�rio."));
+				"N\u00e3o provocar o aparecimento de janelas de sobreposi\u00e7\u00e3o, janelas popup ou outras quaisquer, assim como nenhuma modifica\u00e7\u00e3o do conte\u00fado sem que o usu\u00e1rio seja informado disso. N\u00e3o \u00e9 recomend\u00e1vel para o usu\u00e1rio, que links abram em uma nova janela. Se o usu\u00e1rio utiliza um navegador com tela cheia N\u00e3o poder\u00e1 voltar para a p\u00e1gina anterior, tamb\u00eam o hist\u00f3rico e a possibilidade de ir e voltar a p\00e1ginas visitadas ficam comprometidos. Caso voc\u00ea tenha uma real necessidade que sua p\u00e1gina abra uma outra janela, informe ao usu\u00e1rio."));
 		mapRegra.put("2.7", new Regra(2,
-				"Sempre que existir uma linguagem de marca��o apropriada, utilizar marca��es em vez de imagens para transmitir informa��es, um exemplo � a linguagem MathML que permite a cria��o de f�rmulas matem�ticas somente utilizando-se das tags apropriadas."));
+				"Sempre que existir uma linguagem de marca\u00e7\u00e3o apropriada, utilizar marca\u00e7\u00f5es em vez de imagens para transmitir informa\u00e7\u00f5es, um exemplo \u00e9 a linguagem MathML que permite a cria\u00e7\u00e3o de f\u00f3rmulas matem\u00e1ticas somente utilizando-se das tags apropriadas."));
 		mapRegra.put("2.8", new Regra(2,
-				"Utilizar o elemento \"blockquote\" para marcar cita��es quando existentes. N�o use \"blockquote\", \"ul\", \"dl\" & \"dt\", \"table\" e outros elementos para criar efeitos visuais nos par�grafos. Caso a inten��o seja organizar a estrutura ou a disposi��o de textos no s�tio, utilize folhas de estilo."));
+				"Utilizar o elemento \"blockquote\" para marcar cita\u00e7\u00f5es quando existentes. N\u00e3o use \"blockquote\", \"ul\", \"dl\" & \"dt\", \"table\" e outros elementos para criar efeitos visuais nos par\u00e1grafos. Caso a inten\u00e7\u00e3o seja organizar a estrutura ou a disposi\u00e7\u00e3o de textos no s\u00edtio, utilize folhas de estilo."));
 		mapRegra.put("2.9", new Regra(2,
-				"Criar um estilo de apresenta��o coerente e sistem�tico, ao longo das diferentes p�ginas, como exemplo, mantendo um padr�o de desenho, agrupando os itens do menu de forma coerente. Mantenha os bot�es principais de navega��o no mesmo local em cada p�gina. Isso ajudar� ao usu�rio a localizar-se rapidamente, e saber o destino de cada bot�o levar�. Mantenha para o s�tio uma paleta de cores, estilos de texto e diagrama��o consistente. Identifique as regi�es da p�gina, navega��o e fim de p�gina de forma clara."));
+				"Criar um estilo de apresenta\u00e7\u00e3o coerente e sistem\u00e1tico, ao longo das diferentes p\00e1ginas, como exemplo, mantendo um padr\u00e3o de desenho, agrupando os itens do menu de forma coerente. Mantenha os bot\u00f5es principais de navega\u00e7\u00e3o no mesmo local em cada p\u00e1gina. Isso ajudar\u00e1 ao usu\u00e1rio a localizar-se rapidamente, e saber o destino de cada bot\u00e3o levar\u00e1. Mantenha para o s\u00edtio uma paleta de cores, estilos de texto e diagrama\u00e7\u00e3o consistente. Identifique as regi\u00f5es da p\u00e1gina, navega\u00e7\u00e3o e fim de p\u00e1gina de forma clara."));
 		mapRegra.put("2.10", new Regra(2,
-				"Utilize elementos de cabe�alho de forma l�gica, organizando o conte�do de acordo com uma hierarquia."));
+				"Utilize elementos de cabe\u00e7alho de forma l\u00f3gica, organizando o conte\u00fado de acordo com uma hierarquia."));
 		mapRegra.put("2.11", new Regra(2,
-				"Sempre que necess�rio, divida grandes blocos de informa��o em grupos mais f�ceis de gerenciar. As op��es de menu devem ser dispostas de forma consistente na mesma ordem relativa no grupo de op��es. Se as op��es num painel de menu est�o ordenadas \"arquivo, editar, inserir, imprimir\", essas op��es devem aparecer naquela mesma ordem quando aquele grupo for apresentado novamente (ou quando um outro painel contendo aquele mesmo grupo de op��es seja apresentado)."));
+				"Sempre que necess\u00e1rio, divida grandes blocos de informa\u00e7\u00e3o em grupos mais f\u00e1ceis de gerenciar. As op\u00e7\u00f5es de menu devem ser dispostas de forma consistente na mesma ordem relativa no grupo de op\u00e7\u00f5es. Se as op\u00e7\u00f5es num painel de menu est\u00e3o ordenadas \"arquivo, editar, inserir, imprimir\", essas op\u00e7\u00f5es devem aparecer naquela mesma ordem quando aquele grupo for apresentado novamente (ou quando um outro painel contendo aquele mesmo grupo de op\u00e7\u00f5es seja apresentado)."));
 		mapRegra.put("2.12", new Regra(2,
-				"N�o utilizar tabelas para efeitos de disposi��o em p�gina, prefira o uso de folhas de estilo para a diagrama��o das p�ginas. Sendo utilizadas tabelas construa de forma que a disposi��o continue a fazer sentido depois de ser linearizada. Em �ltimo caso, forne�a um equivalente alternativo (que pode ser uma vers�o linearizada)."));
+				"N\u00e3o utilizar tabelas para efeitos de disposi\u00e7\u00e3o em p\u00e1gina, prefira o uso de folhas de estilo para a diagrama\u00e7\u00e3o das p\00e1ginas. Sendo utilizadas tabelas construa de forma que a disposi\u00e7\u00e3o continue a fazer sentido depois de ser linearizada. Em \u00faltimo caso, forne\u00e7a um equivalente alternativo (que pode ser uma vers\u00e3oo linearizada)."));
 		mapRegra.put("2.13", new Regra(2,
-				"Se for utilizada uma tabela para efeitos de disposi��o em p�gina, n�o utilizar qualquer marca��o estrutural para efeitos de formata��o visual. N�o use comandos destinados a indicar cabe�alhos de tabela como o \"th\" para formatar par�grafos ou fazer t�tulos em \"bold\"."));
+				"Se for utilizada uma tabela para efeitos de disposi\u00e7\u00e3o em p\u00e1gina, N\u00e3o utilizar qualquer marca\u00e7\u00e3o estrutural para efeitos de formata\u00e7\u00e3o visual. N\u00e3o use comandos destinados a indicar cabe\u00e7alhos de tabela como o \"th\" para formatar par\u00e1grafos ou fazer t\u00edtulos em \"bold\"."));
 		mapRegra.put("2.14", new Regra(2,
-				"Incluir caracteres pr�-definidos de preenchimento nas caixas de edi��o e nas �reas de texto, at� que os navegadores tratem corretamente os controles vazios."));
+				"Incluir caracteres pr\u00e9-definidos de preenchimento nas caixas de edi\u00e7\u00e3o e nas \u00e1reas de texto, at\u00e9 que os navegadores tratem corretamente os controles vazios."));
 		mapRegra.put("2.15", new Regra(2,
-				"Usar o elemento \"label\" juntamente com o atributo \"id\" para associar os r�tulos aos respectivos controles dos formul�rios. Assim, os leitores de tela associar�o os elementos do formul�rio de forma correta. Usando o comando \"label\" as pessoas que usam leitores de tela n�o ter�o problemas ao ler o formul�rio. Caso haja grupos de informa��o, controles, etc, a estes devem estar devidamente diferenciados, seja por meio de espa�amento, localiza��o ou elementos gr�ficos."));
+				"Usar o elemento \"label\" juntamente com o atributo \"id\" para associar os r\u00f3tulos aos respectivos controles dos formul\u00e1rios. Assim, os leitores de tela associar\u00e3o os elementos do formul\u00e1rio de forma correta. Usando o comando \"label\" as pessoas que usam leitores de tela N\u00e3o ter\u00e3o problemas ao ler o formul\u00e1rio. Caso haja grupos de informa\u00e7\u00e3o, controles, etc, a estes devem estar devidamente diferenciados, seja por meio de espa\u00e7amento, localiza\u00e7\u00e3o ou elementos gr\u00e1ficos."));
 		mapRegra.put("2.16", new Regra(2,
-				"Assegurar o correto posicionamento de todos os controles de formul�rios que tenham r�tulos implicitamente associados, at� que os leitores de tela ou navegadores do suportem associa��es expl�citas entre r�tulos e controles de formul�rios."));
+				"Assegurar o correto posicionamento de todos os controles de formul\u00e1rios que tenham r\u00f3tulos implicitamente associados, at\u00e9 que os leitores de tela ou navegadores do suportem associa\u00e7\u00f5es expl\u00edcitas entre r\u00f3tulos e controles de formul\u00e1rios."));
 		mapRegra.put("2.17", new Regra(2,
-				"Forne�a informa��es sobre como o s�tio est� estruturado, atrav�s de um mapa ou de sum�rio. Crie o mapa de forma textual, associando aos t�tulos das p�ginas para n�o causar confus�o aos usu�rios que utilizarem leitores de tela."));
+				"forne\u00e7a informa\u00e7\u00f5es sobre como o s\u00edtio est\u00e1 estruturado, atrav\u00e9s de um mapa ou de sum\u00e1rio. Crie o mapa de forma textual, associando aos t\u00edtulos das p\00e1ginas para N\u00e3o causar confus\u00e3o aos usu\u00e1rios que utilizarem leitores de tela."));
 		mapRegra.put("2.18", new Regra(2,
-				"Assegure a acessibilidade de objetos programados, tais como programas interpret�veis e applets, garantindo que a resposta a eventos seja independente do dispositivo de entrada e que qualquer elemento dotado de interface pr�pria possa funcionar com qualquer leitor de tela ou navegador que o usu�rio utilize. Evite colocar scripts que estejam vinculados a links. Se isso n�o for poss�vel, forne�a informa��es equivalentes em uma p�gina alternativa acess�vel."));
+				"Assegure a acessibilidade de objetos programados, tais como programas interpret\u00e1veis e applets, garantindo que a resposta a eventos seja independente do dispositivo de entrada e que qualquer elemento dotado de interface pr\u00f3pria possa funcionar com qualquer leitor de tela ou navegador que o usu\u00e1rio utilize. Evite colocar scripts que estejam vinculados a links. Se isso N\u00e3o for poss\u00edvel, forne\u00e7a informa\u00e7\u00f5es equivalentes em uma p\u00e1gina alternativa acess\u00edvel."));
 		mapRegra.put("2.19", new Regra(2,
-				"Em programas interpret�veis, especificar respostas a eventos, preferindo as rotinas dependentes de dispositivos (mouse, teclado, etc)."));
-		mapRegra.put("3.1", new Regra(3, "N�o usar elementos considerados ultrapassados pelo W3C."));
+				"Em programas interpret\u00e1veis, especificar respostas a eventos, preferindo as rotinas dependentes de dispositivos (mouse, teclado, etc)."));
+		mapRegra.put("3.1", new Regra(3, "N\u00e3o usar elementos considerados ultrapassados pelo W3C."));
 		mapRegra.put("3.2", new Regra(3,
-				"Especificar por extenso cada abreviatura ou sigla, quando da sua primeira ocorr�ncia em um documento, utilizando os atributos \"abbr\" e \"acronym\". Utilize o atributo \"abbr\" dentro de um elemento \"th\" quando voc� tiver cabe�alhos muito longos, para que os leitores de tela lerem apenas o seu conte�do e n�o o texto do cabe�alho na �ntegra."));
+				"Especificar por extenso cada abreviatura ou sigla, quando da sua primeira ocorr\u00e1ncia em um documento, utilizando os atributos \"abbr\" e \"acronym\". Utilize o atributo \"abbr\" dentro de um elemento \"th\" quando vocvoc\u00ea tiver cabe\u00e7alhos muito longos, para que os leitores de tela lerem apenas o seu conte\u00fado e N\u00e3o o texto do cabe\u00e7alho na \u00edntegra."));
 		mapRegra.put("3.3", new Regra(3,
-				"Fornecer atalhos por teclado que apontem para links importantes (incluindo os contidos em mapas de imagem armazenados no cliente), para in�cio da �rea principal de conte�do da p�gina, controles de formul�rios, e grupo de controles de formul�rios."));
+				"Fornecer atalhos por teclado que apontem para links importantes (incluindo os contidos em mapas de imagem armazenados no cliente), para in\u00edcio da \u00e1rea principal de conte\u00fado da p\u00e1gina, controles de formul\u00e1rios, e grupo de controles de formul\u00e1rios."));
 		mapRegra.put("3.4", new Regra(3,
-				"Inserir, entre links adjacentes, caracteres que n�o funcionem como link e sejam pass�veis de impress�o (como um espa�o), at� que os leitores de tela ou navegadores (incluindo as tecnologias de apoio) reproduzam clara e distintamente os links adjacentes."));
+				"Inserir, entre links adjacentes, caracteres que N\u00e3o funcionem como link e sejam pass\u00edveis de impress\u00e3o (como um espa\u00e7o), at\u00e9 que os leitores de tela ou navegadores (incluindo as tecnologias de apoio) reproduzam clara e distintamente os links adjacentes."));
 		mapRegra.put("3.5", new Regra(3,
-				"Sempre que poss�vel, fornecer informa��es que possibilitem aos usu�rios receber os documentos de acordo com as suas prefer�ncias (por ex., por idioma ou por tipo de conte�do)."));
+				"Sempre que poss\u00edvel, fornecer informa\u00e7\u00f5es que possibilitem aos usu\u00e1rios receber os documentos de acordo com as suas prefer\u00eancias (por ex., por idioma ou por tipo de conte\u00fado)."));
 		mapRegra.put("3.6", new Regra(3,
-				"Fornecer barras de navega��o para auxiliar os menus de navega��o. Utilizar elemento que contextualizem a localiza��o do usu�rio, como barras de caminho e \"Sua Localiza��o\" nas p�ginas do documento."));
+				"Fornecer barras de navega\u00e7\u00e3o para auxiliar os menus de navega\u00e7\u00e3o. Utilizar elemento que contextualizem a localiza\u00e7\u00e3o do usu\u00e1rio, como barras de caminho e \"Sua Localiza\u00e7\u00e3o\" nas p\00e1ginas do documento."));
 		mapRegra.put("3.7", new Regra(3,
-				"Agrupar links relacionados entre si, identificando o grupo (em benef�cio do navegador ou leitor de tela do usu�rio) e, at� que o navegador ou leitor de tela do usu�rio se encarregue de tal fun��o, fornecer um modo de contornar determinado grupo."));
+				"Agrupar links relacionados entre si, identificando o grupo (em benef\u00edcio do navegador ou leitor de tela do usu\u00e1rio) e, at\u00e9 que o navegador ou leitor de tela do usu\u00e1rio se encarregue de tal fun\u00e7\u00e3o, fornecer um modo de contornar determinado grupo."));
 		mapRegra.put("3.8", new Regra(3,
-				"Se forem oferecidas fun��es de pesquisa, ativar diferentes tipos de pesquisa de modo a corresponderem a diferentes n�veis de compet�ncia e �s prefer�ncias dos usu�rios. Sendo poss�vel, quando a pesquisa n�o encontrar a palavra, sugerir palavras semelhantes."));
+				"Se forem oferecidas fun\u00e7\u00f5es de pesquisa, ativar diferentes tipos de pesquisa de modo a corresponderem a diferentes n\u00edveis de compet\u00eancia e \u00e0s prefer\u00eancias dos usu\u00e1rios. Sendo poss\u00edvel, quando a pesquisa N\u00e3o encontrar a palavra, sugerir palavras semelhantes."));
 		mapRegra.put("3.9", new Regra(3,
-				"Use palavras relevantes no in�cio de cabe�alhos, par�grafos, e listas para identificar o assunto tratado."));
+				"Use palavras relevantes no in\u00edcio de cabe\u00e7alhos, par\u00e1grafos, e listas para identificar o assunto tratado."));
 		mapRegra.put("3.10", new Regra(3,
-				"Fornecer informa��es sobre documentos compostos por v�rias p�ginas (isto �, cole��es de documentos). Caso seja necess�rio, utilize ferramentas de compacta��o de arquivo, tais como ZIP, TAR, GZIP ou ARJ. Informe o tamanho do arquivo e o tempo estimado para baixar por meio de um modem comum. Forne�a documentos em formatos alternativos, pass�veis de leitura pelos leitores de tela."));
+				"Fornecer informa\u00e7\u00f5es sobre documentos compostos por v\00e1rias p\00e1ginas (isto  \u00e9 , cole\u00e7\u00f5es de documentos). Caso seja necess\u00e1rio, utilize ferramentas de compacta\u00e7\u00e3o de arquivo, tais como ZIP, TAR, GZIP ou ARJ. Informe o tamanho do arquivo e o tempo estimado para baixar por meio de um modem comum. forne\u00e7a documentos em formatos alternativos, pass\u00edveis de leitura pelos leitores de tela."));
 		mapRegra.put("3.11", new Regra(3,
-				"Complementar o texto com apresenta��es gr�ficas ou sonoras, sempre que puderem facilitar a compreens�o da p�gina."));
+				"Complementar o texto com apresenta\u00e7\u00f5es gr\u00e1ficas ou sonoras, sempre que puderem facilitar a compreens\u00e3o da p\u00e1gina."));
 		mapRegra.put("3.12", new Regra(3,
-				"Identificar claramente o destino de cada link, bot�o ou elemento que submeta uma a��o. Prefira utilizar textos mais claros e objetivos, mostrando o verdadeiro sentido e o destino do link. Evite usar frases como \"Clique aqui\"."));
+				"Identificar claramente o destino de cada link, bot\u00e3o ou elemento que submeta uma a\u00e7\u00e3o. Prefira utilizar textos mais claros e objetivos, mostrando o verdadeiro sentido e o destino do link. Evite usar frases como \"Clique aqui\"."));
 		mapRegra.put("3.13", new Regra(3,
-				"Informar previamente ao usu�rio o destino e resultado da a��o, quando houver campos e elementos do formul�rio, como, por exemplo, caixas de sele��o, que submetem automaticamente o conte�do ao se efetuar uma determinada sele��o. Nestes casos, ao inv�s da sele��o submeter automaticamente o formul�rio, � recomend�vel que se vincule ao elemento um bot�o para efetuar a a��o."));
+				"Informar previamente ao usu\u00e1rio o destino e resultado da a\u00e7\u00e3o, quando houver campos e elementos do formul\u00e1rio, como, por exemplo, caixas de sele\u00e7\u00e3o, que submetem automaticamente o conte\u00fado ao se efetuar uma determinada sele\u00e7\u00e3o. Nestes casos, ao inv \u00e9 s da sele\u00e7\u00e3o submeter automaticamente o formul\u00e1rio,  \u00e9  recomend\u00e1vel que se vincule ao elemento um bot\u00e3o para efetuar a a\u00e7\u00e3o."));
 		mapRegra.put("3.14", new Regra(3,
-				"Forne�a metadados para acrescentar informa��es sem�nticas e descritivas do s�tio, que sejam �teis para os mecanismos de busca."));
+				"forne\u00e7a metadados para acrescentar informa\u00e7\u00f5es sem\u00e2nticas e descritivas do s\u00edtio, que sejam \u00fateis para os mecanismos de busca."));
 
 		// Regras especificas da ACBR
-		mapRegra.put("4.1",
-				new Regra(3, "N�o fa�a atalhos \"accesskey\" que entrem em conflito com o Internet Explorer."));
+		mapRegra.put("4.1", new Regra(3,
+				"N\u00e3o fa\u00e7a atalhos \"accesskey\" que entrem em conflito com o Internet Explorer."));
 	}
 
 	@Override
