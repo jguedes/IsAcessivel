@@ -10,11 +10,11 @@
 
 	<ui:composition template="/pages/private/index.xhtml">
 		<ui:define name="conteudo">
-			<p:commandButton update="form:datatable" value="Avaliação de Acessibilidade em: #{resAvals.getUrl()}" style="width:100%;text-align:center;" ajax="false" />
+			<p:commandButton update="form:datatable" value="IsAcessível - Relatório resumido" style="width:100%;text-align:center;" ajax="false" />
 			<p:dataTable id="datatable" var="resumoDeAvaliacao"
 				value="#{resAvals.getListResumoDeAvaliacao()}"
 				paginator="true" rows="4">
-				<p:column headerText="Padrão: #{resAvals.getPadraoAcessibilidade()}, Profundidade: #{resAvals.getProfundidade()}">
+				<p:column headerText="Recomendação: #{resAvals.getPadraoAcessibilidade()}, Profundidade: #{resAvals.getProfundidade()}">
 					<p:panel header="#{resumoDeAvaliacao.link}"
 						style="height:90px;font-size:9pt;">
 						<p:panel header="Erros P1" style="float:left;text-align:center;">

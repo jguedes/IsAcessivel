@@ -101,4 +101,26 @@ public class FachadaArquivador implements Serializable {
 
 	}
 
+	public static void inicializarDiretorioAvaliacao(String folderTemp) {
+
+		System.out.println("inicializarDiretorioAvaliacao(String folderTemp)");
+
+		File folder = new File(folderTemp);
+
+		if (folder.exists()) {
+
+			for (File f : folder.listFiles()) {
+
+				if (f.isFile() && !f.getName().equals("contexto.log")) {
+
+					f.delete();
+
+				}
+
+			}
+
+		}
+
+	}
+
 }

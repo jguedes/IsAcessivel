@@ -80,7 +80,7 @@ public class RelatorioTableModel extends AbstractTableModel {
 			/*
 			 * C�digo da Regra
 			 */
-			data[cont][0] = "Regra " + (wcag_emag == 2 ? "EMAG: " : "WCAG: ") + pv.getGl() + "." + pv.getCp();
+			data[cont][0] = "" + (wcag_emag == 2 ? "EMAG: " : "WCAG: ") + pv.getGl() + "." + pv.getCp();
 			/*
 			 * Texto da regra
 			 */
@@ -100,7 +100,8 @@ public class RelatorioTableModel extends AbstractTableModel {
 
 				}
 
-				data[cont][1] = regra.getTextoRegra(pv.getGl() + "." + pv.getCp()) + GERAL.SAIBA_MAIS_PARENTESES;
+				data[cont][1] = regra.getTextoRegra(pv.getGl() + "." + pv.getCp());// +
+																					// GERAL.SAIBA_MAIS_PARENTESES;
 
 			} else {
 

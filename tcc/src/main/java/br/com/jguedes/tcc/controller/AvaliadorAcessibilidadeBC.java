@@ -34,7 +34,7 @@ public class AvaliadorAcessibilidadeBC implements Serializable {
 				user.getContexto().getCriterio().getProfundidade() == Profundidade.NIVEL1 || //
 				user.getContexto().getCriterio().getProfundidade() == Profundidade.NIVEL2 || //
 				user.getContexto().getCriterio().getProfundidade() == Profundidade.NIVEL3 || //
-				user.getContexto().getCriterio().getProfundidade() == Profundidade.TODO;
+				user.getContexto().getCriterio().getProfundidade() == Profundidade.SITE;
 	}
 
 	/**

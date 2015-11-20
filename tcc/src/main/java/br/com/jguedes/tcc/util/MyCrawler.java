@@ -8,6 +8,7 @@ import ases.RelatorioDaUrl;
 import br.com.jguedes.tcc.gerenciadorrelatorioarquivo.FachadaArquivador;
 import br.com.jguedes.tcc.model.User;
 import br.com.jguedes.tcc.model.criterioavaliacao.CriterioAvaliacao;
+import br.com.jguedes.tcc.model.criterioavaliacao.Profundidade;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
@@ -40,6 +41,10 @@ public class MyCrawler extends WebCrawler {
 		User userLogado = UsersLogados.get(userContextoID);
 
 		CriterioAvaliacao criterio = userLogado.getContexto().getCriterio();
+
+		if (criterio.getProfundidade().equals(Profundidade.PAGINA)) {
+			return false;
+		}
 
 		if (url.getURL().indexOf(criterio.getUrl()) != 0 || url.getURL().indexOf("replytocom") != -1) {
 			return false;
@@ -112,6 +117,12 @@ public class MyCrawler extends WebCrawler {
 			p.parseWAI();
 
 			contexto.gravaLink(contexto.getTotLinks() + ": " + page.getWebURL().getURL());
+
+		}
+
+		if (criterio.getProfundidade().equals(Profundidade.PAGINA)) {
+
+			this.myController.shutdown();
 
 		}
 

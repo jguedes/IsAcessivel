@@ -20,7 +20,7 @@
 					<p:column> #{relUrl.titulo}</p:column>
 				</p:row>
 				<p:row>
-					<p:column style="font-weight: bold;text-align:left;width:40px;"> Link:</p:column>
+					<p:column style="font-weight: bold;text-align:left;width:40px;"> URL:</p:column>
 					<p:column style="font-weight: bold;"> #{relUrl.relatorio.getUrl()}</p:column>
 				</p:row>
 				<p:row>
@@ -32,7 +32,7 @@
 					<p:tabView>
 						<p:tab title="#{relUrl.titErrosP1}">
 							<p:dataTable value="#{relUrl.errosP1()}" var="var">
-								<p:column headerText="Regra">
+								<p:column headerText="Casos Gerais">
 									<h:outputText value="#{var.getRegra()}" />
 								</p:column>
 								<p:column headerText="Ocorrências">
@@ -45,7 +45,7 @@
 						</p:tab>
 						<p:tab title="#{relUrl.titAvisosP1}">
 							<p:dataTable value="#{relUrl.avisosP1()}" var="var">
-								<p:column headerText="Regra">
+								<p:column headerText="Casos Gerais">
 									<h:outputText value="#{var.getRegra()}" />
 								</p:column>
 								<p:column headerText="Ocorrências">
@@ -62,7 +62,7 @@
 					<p:tabView>
 						<p:tab title="#{relUrl.titErrosP2}">
 							<p:dataTable value="#{relUrl.errosP2()}" var="var">
-								<p:column headerText="Regra">
+								<p:column headerText="Casos Gerais">
 									<h:outputText value="#{var.getRegra()}" />
 								</p:column>
 								<p:column headerText="Ocorrências">
@@ -75,7 +75,7 @@
 						</p:tab>
 						<p:tab title="#{relUrl.titAvisosP2}">
 							<p:dataTable value="#{relUrl.avisosP2()}" var="var">
-								<p:column headerText="Regra">
+								<p:column headerText="Casos Gerais">
 									<h:outputText value="#{var.getRegra()}" />
 								</p:column>
 								<p:column headerText="Ocorrências">
@@ -92,7 +92,7 @@
 					<p:tabView>
 						<p:tab title="#{relUrl.titErrosP3}">
 							<p:dataTable value="#{relUrl.errosP3()}" var="var">
-								<p:column headerText="Regra">
+								<p:column headerText="Casos Gerais">
 									<h:outputText value="#{var.getRegra()}" />
 								</p:column>
 								<p:column headerText="Ocorrências">
@@ -105,7 +105,7 @@
 						</p:tab>
 						<p:tab title="#{relUrl.titAvisosP3}">
 							<p:dataTable value="#{relUrl.avisosP3()}" var="var">
-								<p:column headerText="Regra">
+								<p:column headerText="Casos Gerais">
 									<h:outputText value="#{var.getRegra()}" />
 								</p:column>
 								<p:column headerText="Ocorrências">

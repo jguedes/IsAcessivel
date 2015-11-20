@@ -87,7 +87,12 @@ public class AvaliadorAcessibilidadeMB implements Serializable {
 	}
 
 	public List<Profundidade> listaProfundidade() {
-		return Arrays.asList(Profundidade.values());
+
+		Profundidade p[] = { Profundidade.NIVEL1, Profundidade.NIVEL2, Profundidade.NIVEL3, Profundidade.SITE,
+				Profundidade.PAGINA };
+
+		return Arrays.asList(p);
+
 	}
 
 	public User getUser() {

@@ -138,7 +138,7 @@ public class TesteJson {
 
 		String n = g.toJson(p, P.class);
 
-		P r = g.fromJson(n, P.class);
+		// P r = g.fromJson(n, P.class);
 
 		System.out.format(n);
 	}

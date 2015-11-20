@@ -12,7 +12,7 @@ public enum Profundidade {
 	@XmlEnumValue(value = "1") NIVEL1(1), //
 	@XmlEnumValue(value = "2") NIVEL2(2), //
 	@XmlEnumValue(value = "3") NIVEL3(3), //
-	@XmlEnumValue(value = "4") TODO(4), //
+	@XmlEnumValue(value = "4") SITE(4), //
 	@XmlEnumValue(value = "5") PAGINA(5), //
 	@XmlEnumValue(value = "6") HTML_LOCAL(6), //
 	@XmlEnumValue(value = "7") DIRETORIO_LOCAL(7);//

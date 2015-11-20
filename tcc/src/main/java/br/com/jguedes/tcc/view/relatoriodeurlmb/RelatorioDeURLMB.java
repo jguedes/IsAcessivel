@@ -52,7 +52,7 @@ public class RelatorioDeURLMB implements Serializable {
 
 		this.setRelatorio(fachada.getRelatorioDeURL(contexto));
 
-		this.setTitulo("Relatório de avaliação de acessibilidade no padrão "
+		this.setTitulo("IsAcessível - Relatório de avaliação de acessibilidade no padrão "
 				+ this.user.getContexto().getCriterio().getPadraoAcessibilidade());
 
 		this.setTitOcorTotais((relatorio.getErrosPrioridade1() + relatorio.getAvisosPrioridade1()

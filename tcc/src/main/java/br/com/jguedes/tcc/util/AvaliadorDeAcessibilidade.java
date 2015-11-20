@@ -33,6 +33,10 @@ public class AvaliadorDeAcessibilidade implements Runnable, Serializable {
 
 	private void avaliar() {
 
+		contexto.setTotLinks(0);
+
+		FachadaArquivador.inicializarDiretorioAvaliacao(contexto.getFolderTemp());
+
 		FachadaArquivador.setAmbienteArquivacao(AmbienteArquivacaoJSON.JSON_semHTML_semCONTEUDOLINHAS);
 
 		// initDiretorios(contexto);

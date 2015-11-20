@@ -93,7 +93,7 @@ public class CriterioAvaliacao implements Serializable {
 
 	public boolean profundidadeEstaAdequada(String url) {
 
-		if (this.profundidade == Profundidade.TODO || this.profundidade == Profundidade.DIRETORIO_LOCAL) {
+		if (this.profundidade == Profundidade.SITE || this.profundidade == Profundidade.DIRETORIO_LOCAL) {
 
 			return true;
 
