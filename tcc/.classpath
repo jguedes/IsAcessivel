@@ -29,5 +29,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/silvinha2.mli.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

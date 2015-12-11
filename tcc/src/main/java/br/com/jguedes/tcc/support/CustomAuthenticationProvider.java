@@ -1,9 +1,9 @@
 package br.com.jguedes.tcc.support;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -15,14 +15,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import br.com.jguedes.tcc.model.User;
-import br.com.jguedes.tcc.model.repository.IUserDAO;
 import br.com.jguedes.tcc.util.UsersLogados;
 
 @Named
 public class CustomAuthenticationProvider implements AuthenticationProvider {
-
-	@Inject
-	private IUserDAO userDAO;
 
 	public CustomAuthenticationProvider() {
 		super();
@@ -31,13 +27,19 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-		String login = authentication.getName();
+		String nome = authentication.getName().trim().replace(" ", "");
 
-		String password = authentication.getCredentials().toString();
+		// String password = authentication.getCredentials().toString();
 
-		User user = this.userDAO.findByLoginAndPassword(login, password);
+		String password = "";
 
-		if (user != null) {
+		// User user = this.userDAO.findByLoginAndPassword(nome, password);
+
+		if (nome != null && !nome.isEmpty()) {
+
+			User user = new User(nome, nome, password, "ROLE_USER");
+
+			user.setId(new Date().getTime());
 
 			List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 

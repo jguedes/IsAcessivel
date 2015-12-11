@@ -8,7 +8,7 @@
 
 <h:head>
 
-	<title>Projeto Academia</title>
+	<title>Projeto IsAcessível</title>
 	<link rel="stylesheet" type="text/css"
 		href="#{request.contextPath}/public/css/bootstrap.css" />
 
@@ -38,15 +38,12 @@
 
 			<p:panelGrid columns="1" style="width:100%">
 
-				<p:inputText value="joao" id="j_username" requerid="true" placeholder="Username" />
-
-				<p:password value="123" id="j_password" requerid="true" placeholder="Password" />
-
-
+				<p:inputText id="j_username" requerid="true" placeholder="Username" />
+				
 				<f:facet name="footer">
 					<p:row>
 						<c:if test="${param.erro == 'true'}">
-							<h:outputText value="Login ou senha invalidos"
+							<h:outputText value="Nome inválido"
 								style="color: red; font-size: small;" />
 							<br />
 							<br />
