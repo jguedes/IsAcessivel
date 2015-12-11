@@ -38,6 +38,9 @@ public class ContextoDeAvaliacao implements Serializable {
 	@XmlTransient
 	private boolean imprimirNoConsole;
 
+	@XmlTransient
+	private String diretorioPastasTemporariasUsuarios = "/home/joaoguedes/IsAcessivel/tempUsers/";
+
 	// @XmlTransient
 	// private ResumoDeAvaliacao resumoDeAvaliacaoAtual;
 
@@ -57,8 +60,13 @@ public class ContextoDeAvaliacao implements Serializable {
 
 	public String getUserFolder() {
 
-		return "/mnt/774ce448-05a2-4fc5-a56c-3261efee833f/Acadêmica/TCC2 - Or. Danilo Monteiro/testeasesweb/"
-				+ userContextoID + File.separator;
+		if (diretorioPastasTemporariasUsuarios.lastIndexOf(File.separator) == diretorioPastasTemporariasUsuarios.length() - 1) {
+
+			diretorioPastasTemporariasUsuarios = diretorioPastasTemporariasUsuarios.substring(0, diretorioPastasTemporariasUsuarios.lastIndexOf(File.separator));
+
+		}
+
+		return diretorioPastasTemporariasUsuarios.concat(File.separator).concat(userContextoID).concat(File.separator);
 
 	}
 
